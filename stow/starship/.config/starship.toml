@@ -1,0 +1,112 @@
+# AntaresOS · starship.toml — Ice Black
+
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+[](surface0)\
+$os\
+$directory\
+[](fg:surface0 bg:surface1)\
+$git_branch\
+$git_status\
+[](fg:surface1 bg:surface2)\
+$dart\
+$kotlin\
+$java\
+$nodejs\
+$python\
+$docker_context\
+[](fg:surface2 bg:none)\
+$fill\
+$cmd_duration\
+$line_break\
+$character"""
+
+add_newline = true
+palette = "ember_dark"
+
+[fill]
+symbol = " "
+
+[os]
+disabled = false
+style = "bg:surface0 fg:amber"
+[os.symbols]
+Macos = "󰀵 "
+
+[directory]
+style = "bg:surface0 fg:text"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Github" = " "
+"AntaresOS" = "✦ "
+
+[git_branch]
+symbol = ""
+style = "bg:surface1 fg:amber"
+format = '[ $symbol $branch ]($style)'
+
+[git_status]
+style = "bg:surface1 fg:red"
+format = '[$all_status$ahead_behind ]($style)'
+
+[dart]
+symbol = ""
+style = "bg:surface2 fg:lavender"
+format = '[ $symbol ($version) ]($style)'
+
+[kotlin]
+symbol = ""
+style = "bg:surface2 fg:lavender"
+format = '[ $symbol ($version) ]($style)'
+
+[java]
+symbol = ""
+style = "bg:surface2 fg:red"
+format = '[ $symbol ($version) ]($style)'
+
+[docker_context]
+symbol = " "
+style = "bg:surface2 fg:cyan"
+format = '[ $symbol$context ]($style)'
+only_with_files = true
+
+[nodejs]
+symbol = ""
+style = "bg:surface2 fg:green"
+format = '[ $symbol ($version) ]($style)'
+
+[python]
+symbol = ""
+style = "bg:surface2 fg:amber"
+format = '[ $symbol ($version) ]($style)'
+
+[cmd_duration]
+min_time = 500
+style = "fg:dim"
+format = '[  $duration ]($style)'
+
+[character]
+success_symbol = "[❯](bold amber)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold green)"
+
+[palettes.ember_dark]
+amber   = "#e8a020"
+bright  = "#f0c060"
+dim     = "#7a6840"
+text    = "#e8d5a3"
+lavender= "#a48ca1"
+red     = "#c4746e"
+green   = "#87a987"
+cyan    = "#7aa89f"
+blue    = "#7aa8c4"
+orange  = "#d4820a"
+surface2 = "#2e2820"
+surface1 = "#252018"
+surface0 = "#1e1a14"
+base    = "#1a1612"
