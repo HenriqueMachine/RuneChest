@@ -1,0 +1,56 @@
+# Deepdeck · Ghostty — the minimum. Zellij does the tabs, panes and status bar.
+# Palette (Deepdeck soft, 17/11): near black #0e0e14 · text #d8dae5 · magenta #e8457a (active) · cyan #4cc9d6
+# · yellow #e6c84c · dim #7a7f96. Less saturated than the first neon palette, for long sessions.
+
+# Font: JetBrains Mono (tall, open letters), 16 pt, 10 % more line height
+font-family = "JetBrainsMono Nerd Font"
+font-size = 16
+font-thicken = true
+adjust-cell-height = 10%
+
+# Colours: near black, soft contrast
+background = #0e0e14
+foreground = #d8dae5
+cursor-color = #e8457a
+cursor-text = #0e0e14
+selection-background = #2a2a3a
+selection-foreground = #eef0f6
+palette = 0=#16161f
+palette = 1=#e8457a
+palette = 2=#5fd7a0
+palette = 3=#e6c84c
+palette = 4=#6b8cff
+palette = 5=#b36bd6
+palette = 6=#4cc9d6
+palette = 7=#d8dae5
+palette = 8=#7a7f96
+palette = 9=#f0739a
+palette = 10=#86e3b9
+palette = 11=#f0da7a
+palette = 12=#93abff
+palette = 13=#c992e3
+palette = 14=#7ad9e3
+palette = 15=#eef0f6
+
+# Light on the GPU: no transparency, no blur, no shader, no blinking cursor
+background-opacity = 1
+background-blur = false
+cursor-style = block
+cursor-style-blink = false
+window-vsync = true
+unfocused-split-opacity = 1
+
+# Zellij needs Option as Alt (Alt 1..7 go to the tabs)
+macos-option-as-alt = true
+
+# Window: Zellij draws the tabs, so no Ghostty tabs in the title bar
+macos-titlebar-style = hidden
+window-padding-x = 10
+window-padding-y = 8
+window-padding-balance = true
+window-save-state = never
+confirm-close-surface = false
+
+# Shell
+shell-integration = zsh
+copy-on-select = clipboard

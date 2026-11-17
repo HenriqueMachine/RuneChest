@@ -1,0 +1,125 @@
+// Deepdeck · Zellij — cyberpunk, high contrast (ember-dark kept below as a fallback)
+
+theme "deepdeck"
+default_layout "compact"
+default_shell "zsh"
+
+pane_frames true
+mouse_mode true
+copy_on_select true
+copy_command "pbcopy"
+scroll_buffer_size 100000
+
+session_serialization true
+serialize_pane_viewport true
+
+plugins {
+    autolock location="file:~/.config/zellij/plugins/zellij-autolock.wasm" {
+        is_enabled true
+        triggers "nvim|vim|fzf|zoxide|atuin|lazygit|git|less|man|mitmproxy|mitmweb"
+        reaction_seconds "0.3"
+        print_to_log false
+    }
+}
+load_plugins {
+    autolock
+    "file:~/.config/zellij/plugins/zellij-attention.wasm" {
+        enabled "true"
+        waiting_icon "⏳"
+        completed_icon "✅"
+    }
+}
+
+keybinds {
+    // In every mode, also "locked" (autolock locks Zellij while nvim, fzf or lazygit has the focus):
+    // Option+arrow moves between the panes (for example nvim <-> the guide), Option+1..7 goes to a tab,
+    // and Option+g shows the focused pane on the full screen (it hides the guide) and back.
+    shared {
+        bind "Alt Left" { MoveFocusOrTab "Left"; }
+        bind "Alt Right" { MoveFocusOrTab "Right"; }
+        bind "Alt Up" { MoveFocus "Up"; }
+        bind "Alt Down" { MoveFocus "Down"; }
+        bind "Alt g" { ToggleFocusFullscreen; }
+        bind "Alt 1" { GoToTab 1; }
+        bind "Alt 2" { GoToTab 2; }
+        bind "Alt 3" { GoToTab 3; }
+        bind "Alt 4" { GoToTab 4; }
+        bind "Alt 5" { GoToTab 5; }
+        bind "Alt 6" { GoToTab 6; }
+        bind "Alt 7" { GoToTab 7; }
+    }
+    shared_except "locked" {
+        bind "Ctrl h" { MoveFocusOrTab "Left"; }
+        bind "Ctrl l" { MoveFocusOrTab "Right"; }
+        bind "Ctrl j" { MoveFocus "Down"; }
+        bind "Ctrl k" { MoveFocus "Up"; }
+        bind "Ctrl y" {
+            LaunchOrFocusPlugin "file:~/zellij-plugins/zellij_forgot.wasm" {
+                floating true
+            }
+        }
+    }
+}
+
+// Ember Dark — carvão quente + âmbar dourado + lavanda
+// Acento: #e8a020 (âmbar) · secundária: #a48ca1 (lavanda) · green: #87a987
+themes {
+    deepdeck {
+        bg "#0e0e14"
+        fg "#d8dae5"
+        black "#0e0e14"
+        red "#e8457a"
+        green "#5fd7a0"
+        yellow "#e6c84c"
+        blue "#6b8cff"
+        magenta "#e8457a"
+        cyan "#4cc9d6"
+        white "#eef0f6"
+        orange "#e6c84c"
+
+        text_unselected       { base "#d8dae5"; background "#0e0e14"; emphasis_0 "#e8457a"; emphasis_1 "#4cc9d6"; emphasis_2 "#e6c84c"; emphasis_3 "#5fd7a0"; }
+        text_selected         { base "#0e0e14"; background "#e8457a"; emphasis_0 "#e6c84c"; emphasis_1 "#4cc9d6"; emphasis_2 "#d8dae5"; emphasis_3 "#5fd7a0"; }
+        ribbon_selected       { base "#0e0e14"; background "#e8457a"; emphasis_0 "#0e0e14"; emphasis_1 "#0e0e14"; emphasis_2 "#0e0e14"; emphasis_3 "#0e0e14"; }
+        ribbon_unselected     { base "#878ca6"; background "#0e0e14"; emphasis_0 "#878ca6"; emphasis_1 "#878ca6"; emphasis_2 "#878ca6"; emphasis_3 "#878ca6"; }
+        table_title           { base "#e8457a"; background 0; emphasis_0 "#4cc9d6"; emphasis_1 "#e8457a"; emphasis_2 "#e6c84c"; emphasis_3 "#5fd7a0"; }
+        table_cell_selected   { base "#d8dae5"; background "#1c1c28"; emphasis_0 "#e8457a"; emphasis_1 "#4cc9d6"; emphasis_2 "#e6c84c"; emphasis_3 "#5fd7a0"; }
+        table_cell_unselected { base "#d8dae5"; background "#0e0e14"; emphasis_0 "#e8457a"; emphasis_1 "#4cc9d6"; emphasis_2 "#e6c84c"; emphasis_3 "#5fd7a0"; }
+        list_selected         { base "#d8dae5"; background "#1c1c28"; emphasis_0 "#e8457a"; emphasis_1 "#4cc9d6"; emphasis_2 "#e6c84c"; emphasis_3 "#5fd7a0"; }
+        list_unselected       { base "#d8dae5"; background "#0e0e14"; emphasis_0 "#e8457a"; emphasis_1 "#4cc9d6"; emphasis_2 "#e6c84c"; emphasis_3 "#5fd7a0"; }
+        frame_unselected      { base "#2e2e3e"; background 0; emphasis_0 "#2e2e3e"; emphasis_1 "#2e2e3e"; emphasis_2 "#2e2e3e"; emphasis_3 "#2e2e3e"; }
+        frame_selected        { base "#e8457a"; background 0; emphasis_0 "#e8457a"; emphasis_1 "#4cc9d6"; emphasis_2 "#e6c84c"; emphasis_3 "#5fd7a0"; }
+        frame_highlight       { base "#e6c84c"; background 0; emphasis_0 "#e6c84c"; emphasis_1 "#e6c84c"; emphasis_2 "#e6c84c"; emphasis_3 "#e6c84c"; }
+        exit_code_success     { base "#5fd7a0"; background 0; emphasis_0 "#4cc9d6"; emphasis_1 "#5fd7a0"; emphasis_2 "#6b8cff"; emphasis_3 "#d8dae5"; }
+        exit_code_error       { base "#e8457a"; background 0; emphasis_0 "#e8457a"; emphasis_1 "#e8457a"; emphasis_2 "#e8457a"; emphasis_3 "#e8457a"; }
+        multiplayer_user_colors{ base "#e8457a"; background 0; emphasis_0 "#4cc9d6"; emphasis_1 "#5fd7a0"; emphasis_2 "#e6c84c"; emphasis_3 "#6b8cff"; }
+    }
+    ember-dark {
+        bg "#1a1612"
+        fg "#e8d5a3"
+        black "#1e1a14"
+        red "#c4746e"
+        green "#87a987"
+        yellow "#e8c96a"
+        blue "#7aa8c4"
+        magenta "#a48ca1"
+        cyan "#7aa89f"
+        white "#e8d5a3"
+        orange "#e8a020"
+
+        text_unselected      { base "#e8d5a3"; background "#1a1612"; emphasis_0 "#e8a020"; emphasis_1 "#a48ca1"; emphasis_2 "#7aa8c4"; emphasis_3 "#87a987"; }
+        text_selected        { base "#1a1612"; background "#e8a020"; emphasis_0 "#f0c060"; emphasis_1 "#a48ca1"; emphasis_2 "#7aa8c4"; emphasis_3 "#87a987"; }
+        ribbon_selected      { base "#1a1612"; background "#e8a020"; emphasis_0 "#1a1612"; emphasis_1 "#1a1612"; emphasis_2 "#1a1612"; emphasis_3 "#1a1612"; }
+        ribbon_unselected    { base "#7a6840"; background "#1a1612"; emphasis_0 "#7a6840"; emphasis_1 "#7a6840"; emphasis_2 "#7a6840"; emphasis_3 "#7a6840"; }
+        table_title          { base "#e8a020"; background 0; emphasis_0 "#f0c060"; emphasis_1 "#e8a020"; emphasis_2 "#a48ca1"; emphasis_3 "#87a987"; }
+        table_cell_selected  { base "#e8d5a3"; background "#252018"; emphasis_0 "#e8a020"; emphasis_1 "#a48ca1"; emphasis_2 "#7aa8c4"; emphasis_3 "#87a987"; }
+        table_cell_unselected{ base "#e8d5a3"; background "#1a1612"; emphasis_0 "#e8a020"; emphasis_1 "#a48ca1"; emphasis_2 "#7aa8c4"; emphasis_3 "#87a987"; }
+        list_selected        { base "#e8d5a3"; background "#252018"; emphasis_0 "#e8a020"; emphasis_1 "#a48ca1"; emphasis_2 "#7aa8c4"; emphasis_3 "#87a987"; }
+        list_unselected      { base "#e8d5a3"; background "#1a1612"; emphasis_0 "#e8a020"; emphasis_1 "#a48ca1"; emphasis_2 "#7aa8c4"; emphasis_3 "#87a987"; }
+        frame_unselected     { base "#2e2820"; background 0; emphasis_0 "#2e2820"; emphasis_1 "#2e2820"; emphasis_2 "#2e2820"; emphasis_3 "#2e2820"; }
+        frame_selected       { base "#f0c060"; background 0; emphasis_0 "#f0c060"; emphasis_1 "#e8a020"; emphasis_2 "#a48ca1"; emphasis_3 "#87a987"; }
+        frame_highlight      { base "#f0c060"; background 0; emphasis_0 "#f0c060"; emphasis_1 "#f0c060"; emphasis_2 "#f0c060"; emphasis_3 "#f0c060"; }
+        exit_code_success    { base "#87a987"; background 0; emphasis_0 "#e8a020"; emphasis_1 "#87a987"; emphasis_2 "#7aa8c4"; emphasis_3 "#e8d5a3"; }
+        exit_code_error      { base "#c4746e"; background 0; emphasis_0 "#c4746e"; emphasis_1 "#c4746e"; emphasis_2 "#c4746e"; emphasis_3 "#c4746e"; }
+        multiplayer_user_colors { base "#e8a020"; background 0; emphasis_0 "#f0c060"; emphasis_1 "#87a987"; emphasis_2 "#a48ca1"; emphasis_3 "#c4746e"; }
+    }
+}

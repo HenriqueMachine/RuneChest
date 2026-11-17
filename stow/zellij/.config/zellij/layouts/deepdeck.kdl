@@ -1,0 +1,81 @@
+// Deepdeck · layout "deepdeck" — FoodBot with the Runeterra agents
+// Tabs: 1 NVIM · 2 PAINEL · 3 BACKEND · 4 APP · 5 SWAIN · 6 EXTRA · 7 AGENTES  (Alt 1..7)
+// Agent panes are suspended: they show the command, and ENTER starts the agent (on demand, user decision 17/11).
+// When a session ends, the pane shows the command again and ENTER starts a new one (one session per ticket).
+// Emoji and colours: vault 11-Agentes/Identidade.md.
+
+layout {
+    cwd "/Users/henriquepaixao/Foodbot"
+
+    default_tab_template {
+        // Native tab bar: zjstatus does not render on Zellij 0.44.3 (the same fix as work.kdl, 08e3020).
+        // The heavy lanes and the clock are in the PAINEL tab.
+        pane size=1 borderless=true {
+            plugin location="zellij:tab-bar"
+        }
+        children
+        // The key hints at the bottom (Ctrl + g LOCK, p PANE, t TAB...), in the theme colours.
+        pane size=2 borderless=true {
+            plugin location="zellij:status-bar"
+        }
+    }
+
+    // NVIM: the editor (70 %) and the GUIA (30 %, docs/guia-nvim.txt). Option+arrow goes between them; Option+g hides the guide.
+    tab name="NVIM" focus=true {
+        pane split_direction="vertical" {
+            pane command="nvim" size="70%" focus=true
+            pane name="GUIA" command="bash" size="30%" {
+                args "/Users/henriquepaixao/Github/Deepdeck/scripts/deepdeck-guide.sh"
+            }
+        }
+    }
+
+    tab name="PAINEL" {
+        pane command="bash" borderless=true {
+            args "/Users/henriquepaixao/Github/Deepdeck/scripts/deepdeck-panel.sh"
+        }
+    }
+
+    tab name="🗿⚙️ BACKEND" {
+        pane split_direction="vertical" {
+            pane name="🗿 Galio · integrador backend" command="/Users/henriquepaixao/Foodbot/foodbot-ops/bin/agent" start_suspended=true {
+                args "galio"
+            }
+            pane name="⚙️ Viktor · executor backend" command="/Users/henriquepaixao/Foodbot/foodbot-ops/bin/agent" start_suspended=true {
+                args "viktor"
+            }
+        }
+    }
+
+    tab name="💎🔧 APP" {
+        pane split_direction="vertical" {
+            pane name="💎 Taric · integrador app" command="/Users/henriquepaixao/Foodbot/foodbot-ops/bin/agent" start_suspended=true {
+                args "taric"
+            }
+            pane name="🔧 Heimerdinger · executor app" command="/Users/henriquepaixao/Foodbot/foodbot-ops/bin/agent" start_suspended=true {
+                args "heimerdinger"
+            }
+        }
+    }
+
+    tab name="🐦‍⬛⏳ SWAIN" {
+        pane split_direction="vertical" {
+            pane name="🐦‍⬛ Swain · orquestrador" command="/Users/henriquepaixao/Foodbot/foodbot-ops/bin/agent" start_suspended=true {
+                args "swain"
+            }
+            pane name="⏳ Zilean · IA full-stack" command="/Users/henriquepaixao/Foodbot/foodbot-ops/bin/agent" start_suspended=true {
+                args "zilean"
+            }
+        }
+    }
+
+    tab name="EXTRA" {
+        pane name="⛓️ Thresh · 🎩 Lupin · 🪝 Pyke — sob demanda: deepdeck agent <nome>"
+    }
+
+    tab name="AGENTES" {
+        pane command="bash" borderless=true {
+            args "/Users/henriquepaixao/Github/Deepdeck/scripts/deepdeck-agents.sh"
+        }
+    }
+}
