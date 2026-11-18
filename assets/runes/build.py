@@ -202,6 +202,7 @@ def build_font(glyphs: list) -> Path:
     fb.setupOS2(sTypoAscender=800, sTypoDescender=-200, usWinAscent=800, usWinDescent=200,
                 fsType=0, achVendID="DPDK")
     fb.setupPost(isFixedPitch=1)
+    fb.font["head"].created = fb.font["head"].modified = 3_846_528_000   # fixed (2025-11-21), so a rebuild is the same file
     out = HERE / "DeepdeckRunes.ttf"
     fb.save(str(out))
     return out
