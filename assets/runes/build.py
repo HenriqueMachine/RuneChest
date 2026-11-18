@@ -147,7 +147,7 @@ def svg(polys: list, title: str, neon: str | None = None) -> str:
         body = f'<path fill="currentColor" d="{d}"/>'
         box = "0 0 100 100"
     else:
-        fid = "g" + str(abs(hash(title)) % 10**8)
+        fid = "glow-" + slug(title.split(":")[0])
         body = (
             f'<defs><filter id="{fid}" x="-30%" y="-30%" width="160%" height="160%">'
             f'<feGaussianBlur stdDeviation="3.2" result="b1"/><feGaussianBlur stdDeviation="1.2" result="b2"/>'
