@@ -24,6 +24,9 @@
   h2{margin:4px 0 0;font:italic 22px "Monaspace Radon","JetBrains Mono",ui-monospace,monospace;color:var(--c)}
   .role{margin:2px 0 0;color:var(--text);font-size:13px}
   .object{margin:0;color:var(--dim);font-size:12px}
+  .mood{display:inline-block;margin-top:6px;font-size:11px;color:var(--dim);border:1px solid var(--line);border-radius:999px;padding:1px 8px}
+  .mood[data-mood="thinking"]{color:var(--c);border-color:color-mix(in srgb,var(--c) 50%,transparent)}
+  .mood[data-mood="happy"]{color:#0e0e14;background:var(--c);border-color:var(--c)}
   footer{max-width:1180px;margin:0 auto;padding:0 16px 32px;color:var(--dim);font-size:12px}
   footer a{color:var(--dim)}
   @media (max-width:480px){.bot{width:120px}}
@@ -33,9 +36,10 @@
 <header>
   <img src="crew/banner.svg" alt="RuneChest: as treze runas neon da tripulação">
   <div class="bar">
-    <p>Os olhos seguem o mouse. Passe o cursor num agente para ele ficar feliz.</p>
+    <p id="hint">Cada agente tem seu jeito: uns pensam, uns vigiam, uns comemoram. Passe o cursor num agente para ele olhar para você.</p>
     <div class="moods" role="group" aria-label="Humor de todos">
-      <button type="button" data-mood="idle" aria-pressed="true">em espera</button>
+      <button type="button" data-mood="life" aria-pressed="true">vida própria</button>
+      <button type="button" data-mood="idle" aria-pressed="false">em espera</button>
       <button type="button" data-mood="thinking" aria-pressed="false">trabalhando</button>
       <button type="button" data-mood="happy" aria-pressed="false">mesclado</button>
     </div>
@@ -50,41 +54,92 @@
 import { validateAvatar } from "./crew/vendor/open-bot-avatar/index.js";
 import { mountAvatar } from "./crew/vendor/open-bot-avatar/dom/index.js";
 
+// Personality: the base mood, where the agent looks when nobody points at it, and the moods it drifts into.
+// gaze "pointer" follows the mouse; {x, y} (-1..1) is a fixed look direction.
+const PERSONA = {
+  odin:     { mood: "thinking", gaze: { x: 0.25, y: -0.6 }, drift: ["thinking", "idle", "thinking", "happy"] },
+  heimdall: { mood: "idle",     gaze: "pointer",            drift: ["idle", "idle", "thinking"] },
+  forseti:  { mood: "idle",     gaze: { x: 0, y: 0 },        drift: ["idle", "thinking", "idle"] },
+  eitri:    { mood: "thinking", gaze: { x: 0.1, y: 0.6 },    drift: ["thinking", "thinking", "happy"] },
+  volundr:  { mood: "happy",    gaze: "pointer",            drift: ["happy", "thinking", "happy"] },
+  brokkr:   { mood: "thinking", gaze: { x: -0.7, y: 0.1 },   drift: ["thinking", "idle", "happy"] },
+  egill:    { mood: "idle",     gaze: "pointer",            drift: ["idle", "happy", "idle"] },
+  grisnir:  { mood: "happy",    gaze: { x: 0.8, y: 0 },      drift: ["happy", "idle", "happy"] },
+  gnjostr:  { mood: "happy",    gaze: { x: -0.8, y: 0 },     drift: ["happy", "happy", "idle"] },
+  mimir:    { mood: "thinking", gaze: { x: -0.3, y: -0.7 },  drift: ["thinking", "thinking", "idle"] },
+  bifrost:  { mood: "happy",    gaze: "pointer",            drift: ["happy", "idle", "happy"] },
+  bragi:    { mood: "happy",    gaze: { x: 0.4, y: -0.35 },  drift: ["happy", "happy", "thinking"] },
+  nidhoggr: { mood: "idle",     gaze: { x: 0, y: 0.7 },      drift: ["idle", "thinking", "idle"] },
+};
+const WORDS = { idle: "em espera", thinking: "trabalhando", happy: "feliz" };
+
 const main = document.getElementById("crew");
 const crew = await (await fetch("crew/crew.json")).json();
-// Optional, local only: crew/status.json maps an agent id to a mood. It is not published (see .gitignore).
-const status = await fetch("crew/status.json").then((r) => (r.ok ? r.json() : {})).catch(() => ({}));
+// Local only: crew/status.json ({"odin": "thinking", ...}) comes from the vault (`runechest tripulacao`). It is
+// never published, so the public page shows the personalities.
+const status = await fetch("crew/status.json").then((r) => (r.ok ? r.json() : null)).catch(() => null);
+if (status) document.getElementById("hint").textContent =
+  "Humor real de cada agente, lido do vault agora. Passe o cursor num agente para ele olhar para você.";
+
 const bots = [];
+let mode = "life";
+const pick = (list) => list[Math.floor(Math.random() * list.length)];
+const gazeOf = (p) => (p.gaze === "pointer" ? { followPointer: true, lookAt: undefined } : { followPointer: false, lookAt: p.gaze });
+
+function show(bot, mood) {
+  bot.mood = mood;
+  bot.avatar.update({ mood });
+  bot.label.dataset.mood = mood;
+  bot.label.textContent = WORDS[mood];
+}
 
 for (const a of crew) {
+  const p = PERSONA[a.id] ?? { mood: "idle", gaze: "pointer", drift: ["idle"] };
   const card = document.createElement("article");
   card.style.setProperty("--c", a.neon);
   card.tabIndex = 0;
   card.innerHTML = `<div class="bot"></div><div class="rune" aria-hidden="true">${a.rune}</div>
-    <h2>${a.name}</h2><p class="role">${a.role}</p><p class="object">${a.object}</p>`;
+    <h2>${a.name}</h2><p class="role">${a.role}</p><p class="object">${a.object}</p><span class="mood"></span>`;
   main.append(card);
   const checked = validateAvatar(a.definition);
   if (!checked.ok) continue;
-  const base = status[a.id] ?? "idle";
+  const base = status?.[a.id] ?? p.mood;
   const avatar = mountAvatar(card.querySelector(".bot"), {
-    definition: checked.value, color: a.neon, eyeColor: "#0e0e14", followPointer: true, mood: base,
+    definition: checked.value, color: a.neon, eyeColor: "#0e0e14", mood: base, ...gazeOf(p),
     label: `${a.name}, ${a.object}`,
   });
-  const bot = { avatar, base };
+  const bot = { id: a.id, avatar, persona: p, base, mood: base, hover: false, label: card.querySelector(".mood") };
   bots.push(bot);
-  card.addEventListener("pointerenter", () => avatar.update({ mood: "happy" }));
-  card.addEventListener("pointerleave", () => avatar.update({ mood: bot.base }));
-  card.addEventListener("focus", () => avatar.update({ mood: "happy" }));
-  card.addEventListener("blur", () => avatar.update({ mood: bot.base }));
+  show(bot, base);
+  const enter = () => { bot.hover = true; avatar.update({ followPointer: true, lookAt: undefined, mood: "happy" }); };
+  const leave = () => { bot.hover = false; avatar.update({ ...gazeOf(p), mood: bot.mood }); };
+  card.addEventListener("pointerenter", enter);
+  card.addEventListener("pointerleave", leave);
+  card.addEventListener("focus", enter);
+  card.addEventListener("blur", leave);
 }
+
+// Life: each agent drifts on its own clock (6 to 14 s), so they never change together. With the real status from
+// the vault, the mood stays; only the gaze wanders.
+function drift(bot) {
+  setTimeout(() => {
+    if (!bot.hover && mode === "life") {
+      if (!status) show(bot, pick(bot.persona.drift));
+      if (bot.persona.gaze !== "pointer" && Math.random() < 0.3) {
+        bot.avatar.update({ followPointer: true, lookAt: undefined });
+        setTimeout(() => { if (!bot.hover) bot.avatar.update(gazeOf(bot.persona)); }, 2500);
+      }
+    }
+    drift(bot);
+  }, 6000 + Math.random() * 8000);
+}
+bots.forEach(drift);
 
 for (const button of document.querySelectorAll(".moods button")) {
   button.addEventListener("click", () => {
     for (const b of document.querySelectorAll(".moods button")) b.setAttribute("aria-pressed", String(b === button));
-    for (const bot of bots) {
-      bot.base = button.dataset.mood;
-      bot.avatar.update({ mood: bot.base });
-    }
+    mode = button.dataset.mood;
+    for (const bot of bots) show(bot, mode === "life" ? (status?.[bot.id] ?? bot.persona.mood) : mode);
   });
 }
 </script>

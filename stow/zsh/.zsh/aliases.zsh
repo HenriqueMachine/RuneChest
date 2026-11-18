@@ -85,6 +85,7 @@ runechest() {
                   "$HOME/Foodbot/foodbot-ops/bin/agent" "${@:2}" ;;
     panel|painel) bash "$RUNECHEST_DIR/scripts/runechest-panel.sh" ;;
     runas|runes)  bash "$RUNECHEST_DIR/scripts/runechest-runes.sh" ;;
+    tripulacao|tripulação|crew) bash "$RUNECHEST_DIR/scripts/runechest-crew.sh" ;;
     reset)        zellij kill-session runechest 2>/dev/null; zellij delete-session runechest 2>/dev/null
                   print "sessão runechest removida — 'runechest open' cria de novo" ;;
     dev)          dev ;;
@@ -107,6 +108,7 @@ runechest() {
       print "  agent N   abre o agente N aqui (ex.: runechest agent thresh)"
       print "  panel     o painel de métricas neste painel"
       print "  runas     a tripulação nórdica: runas, nomes e cores (2.9.0)"
+      print "  tripulacao a página dos avatares com o humor real de cada agente (só nesta máquina)"
       print "  reset     apaga a sessão runechest (o layout novo vale na próxima)"
       print "  dev       o layout antigo (editor + terminais + lib)"
       print "  work      Foodbot + CourtHub em paralelo (5 tabs)"
