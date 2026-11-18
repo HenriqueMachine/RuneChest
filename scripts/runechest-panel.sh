@@ -119,7 +119,7 @@ draw() {
     printf '\e[1;1H%s%s▓▒░ RUNECHEST %s%s· FoodBot%s' "$M" "$B" "$R" "$C" "$R"
     printf '\e[1;%dH%s%s%s%s' "$(( cols - 5 ))" "$Y" "$B" "$(date '+%H:%M')" "$R"
     row=3
-    place 1 $row < <(head_line "AGENTES" "cinza = sem atualização hoje" "$lw"); row=$NEXT_ROW
+    place 1 $row < <(head_line "TRIPULAÇÃO" "cinza = sem atualização hoje" "$lw"); row=$NEXT_ROW
     place 2 $row <<<"$L1"; row=$((NEXT_ROW + 1))
     place 1 $row < <(head_line "DIÁRIO" "hoje" "$lw"); row=$NEXT_ROW
     place 2 $row <<<"$L2"

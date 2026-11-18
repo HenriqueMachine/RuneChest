@@ -46,7 +46,7 @@ cursor-style-blink = false
 window-vsync = true
 unfocused-split-opacity = 1
 
-# Zellij needs Option as Alt (Alt 1..7 go to the tabs)
+# Zellij needs Option as Alt (Alt 1..8 go to the tabs)
 macos-option-as-alt = true
 # Ghostty maps Option+Left/Right to "word back/forward" (Esc b / Esc f) by default. Zellij reads Esc f as Alt+f
 # (new floating pane). Unbind them, so Option+arrows send the real Alt+arrow keys, as in iTerm2: Zellij moves
