@@ -1,0 +1,9 @@
+{
+  "name": "runechest-avatars",
+  "private": true,
+  "type": "module",
+  "description": "The RuneChest crew avatars (open-bot-avatar, MIT): definitions, validation, still SVGs.",
+  "dependencies": {
+    "open-bot-avatar": "^0.2.1"
+  }
+}

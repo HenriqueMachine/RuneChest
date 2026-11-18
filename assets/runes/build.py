@@ -161,6 +161,33 @@ def svg(polys: list, title: str, neon: str | None = None) -> str:
     )
 
 
+def banner(items: list) -> str:
+    """The README banner: the 13 neon runes in a row with a glow, the name and one line. 1280 x 360."""
+    cell, top, left = 92, 62, (1280 - 92 * len(items)) / 2
+    runes = []
+    for i, (name, polys, neon) in enumerate(items):
+        x = left + i * cell + 6
+        runes.append(
+            f'<g transform="translate({x:.1f} {top}) scale(0.8)"><path fill="{neon}" filter="url(#glow)" d="{path_of(polys)}"/></g>'
+        )
+    return (
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 360" role="img" aria-label="RuneChest">'
+        "<title>RuneChest</title><defs>"
+        '<filter id="glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="4" result="b1"/>'
+        '<feGaussianBlur stdDeviation="1.4" result="b2"/><feMerge><feMergeNode in="b1"/><feMergeNode in="b2"/>'
+        '<feMergeNode in="SourceGraphic"/></feMerge></filter>'
+        '<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#13131b"/>'
+        '<stop offset="1" stop-color="#0e0e14"/></linearGradient></defs>'
+        '<rect width="1280" height="360" rx="18" fill="url(#bg)"/>'
+        '<rect x="1" y="1" width="1278" height="358" rx="17" fill="none" stroke="#2e2e3e" stroke-width="2"/>'
+        + "".join(runes) +
+        '<text x="640" y="262" text-anchor="middle" fill="#eef0f6" font-family="Monaspace Radon, JetBrains Mono, '
+        'ui-monospace, monospace" font-style="italic" font-size="64" letter-spacing="4">RuneChest</text>'
+        '<text x="640" y="306" text-anchor="middle" fill="#878ca6" font-family="JetBrains Mono, ui-monospace, '
+        'monospace" font-size="20">one developer · a crew of thirteen agents · one calm screen</text></svg>\n'
+    )
+
+
 FIRST_CODEPOINT = 0x100000
 EM = 1000
 
@@ -209,11 +236,12 @@ def build_font(glyphs: list) -> Path:
 
 
 def main() -> None:
-    cards, glyphs = [], []
+    cards, glyphs, row = [], [], []
     for i, (name, initial, role_rune, role, today, layer, neon) in enumerate(CREW):
         title = f"{name}: {RUNES[initial][0]} + {RUNES[role_rune][0]}"
         polys = polygons(strokes_of(initial, role_rune), name)
         glyphs.append((slug(name), FIRST_CODEPOINT + i, polys))
+        row.append((name, polys, neon))
         mono, glow = svg(polys, title), svg(polys, title, neon)
         (HERE / f"{slug(name)}.svg").write_text(mono, encoding="utf-8")
         (HERE / f"{slug(name)}-neon.svg").write_text(glow, encoding="utf-8")
@@ -230,6 +258,7 @@ def main() -> None:
             f'<h2>{escape(name)}</h2><p class="role">{escape(role)} · {layer} · hoje {escape(today)}</p>'
             f'<div class="parts">{parts}</div><div class="sizes">{sizes}</div></article>'
         )
+    (HERE / "banner.svg").write_text(banner(row), encoding="utf-8")
     (HERE / "preview.html").write_text(PAGE.replace("{{CARDS}}", "\n".join(cards)), encoding="utf-8")
     print(f"{len(CREW)} runes (mono + neon) -> {HERE}")
     table = "\n".join(f"{n}\tU+{FIRST_CODEPOINT + i:06X}\t{c}\t{r}\t{t}"

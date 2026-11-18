@@ -23,3 +23,7 @@ __pycache__/
 
 # Python venv (the rune font build)
 .venv/
+node_modules/
+
+# The local mood feed of the crew page (never published)
+docs/crew/status.json

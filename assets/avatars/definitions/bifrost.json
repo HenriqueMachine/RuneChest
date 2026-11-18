@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "id": "bifrost",
+  "name": "Bifröst",
+  "body": {
+    "path": "M9 86V60A41 41 0 0 1 91 60V86H71V62A21 21 0 0 0 29 62V86Z"
+  },
+  "eyes": {
+    "x": 50,
+    "y": 30,
+    "spacing": 16,
+    "scale": 1.05
+  }
+}

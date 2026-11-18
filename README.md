@@ -1,3 +1,5 @@
+<p align="center"><img src="assets/runes/banner.svg" alt="RuneChest: the thirteen neon runes of the crew" width="100%"></p>
+
 # RuneChest
 
 **One developer, a team of agents.** RuneChest is the personal development environment of a solo founder: the
@@ -36,21 +38,21 @@ flowchart TB
         G[Ghostty<br/>font, palette, GPU]
         Z[Zellij<br/>tabs per role, key bar]
         N[Neovim + GUIA<br/>LazyVim, command guide]
-        P[PAINEL<br/>agents, heavy lanes, PRs, tokens]
+        P[PAINEL · Huginn and Muninn<br/>agents, heavy lanes, PRs, tokens]
     end
     subgraph Crew["The crew (Claude Code sessions)"]
-        S[🐦‍⬛ Swain · orchestrator]
-        I[🗿 Galio · 💎 Taric<br/>integrators]
-        E[⚙️ Viktor · 🔧 Heimerdinger · ⏳ Zilean<br/>executors]
-        H[🪶 Xayah · 🌹 Rakan · 💣 Ziggs · 🔥 Rumble<br/>helpers as subagents]
+        S[Odin · orchestrator]
+        I[Heimdall · Forseti<br/>integrators]
+        E[Eitri · Völundr · Mímir<br/>executors]
+        H[Brokkr · Egill · Grisnir · Gnjóstr<br/>helpers as subagents]
     end
     subgraph Memory["State in files (the Memento tattoos)"]
-        V[(Obsidian vault<br/>one note per agent,<br/>Agentes.base)]
+        V[(Yggdrasil · Obsidian vault<br/>one note per agent,<br/>Agentes.base)]
         C[CLAUDE.md + skills<br/>+ agent contracts]
         Git[(git + PRs<br/>changelog)]
     end
     subgraph Harness["Harness (what a prompt cannot promise)"]
-        K[hooks: agent-guard,<br/>agent-context, notify]
+        K[hooks: Gleipnir agent-guard,<br/>agent-context, Ratatoskr notify]
         Q[heavy queue<br/>heavy and quick lanes]
     end
     U([You]) --> G --> Z
@@ -74,30 +76,41 @@ flowchart TB
 
 ## The crew
 
-Every agent takes the name of a League of Legends champion. The emoji and the colour come from one table
-(`11-Agentes/Identidade.md` in the vault), which the scripts read.
+Every agent takes a Norse name by layer: gods lead and specialise, dwarf smiths execute and help, beasts do the
+mechanical work and eat the dead code. Each one has a **bind-rune** (the rune of the first letter + the rune of the
+role, cut Mad Max style, in the neon of its layer) and an **avatar** (a Norse object or creature, made with
+[open-bot-avatar](https://github.com/DominikScholz/open-bot-avatar), MIT). The full story of each name is in
+[docs/nomes-nordicos.md](docs/nomes-nordicos.md). The FoodBot sessions switch to these names at the start of 2.9.0;
+the last column is the name they use until then.
 
-| | Agent | Role | Model | Session |
-|---|---|---|---|---|
-| 🐦‍⬛ | **Swain** | Orchestrator: plans the version, writes the tickets, decides with you, runs the release | Opus | fixed |
-| 🗿 | **Galio** | Backend integrator: reviews and merges service PRs, owns the migration queue | Opus | fixed |
-| 💎 | **Taric** | App integrator: design fidelity, reviews and merges app PRs | Opus | fixed |
-| ⚙️ | **Viktor** | Backend executor: plans and writes the service features | Opus | fixed |
-| 🔧 | **Heimerdinger** | App executor: plans and writes the Flutter screens | Opus | fixed |
-| ⏳ | **Zilean** | Full-stack AI: the assistant, calibration, pricing, the lab | Opus | fixed |
-| ⛓️ | **Thresh** | Full-stack integrations: iFood, the WhatsApp bot, the landing, the alerts | Opus | on demand |
-| 🎩 | **Lupin** | Marketing, design, PDFs and product copy | Sonnet | on demand |
-| 🪝 | **Pyke** | Dead code and refactor | Sonnet | on demand |
-| 🪶 | **Xayah** | Code helper of Viktor | Sonnet | subagent |
-| 🌹 | **Rakan** | Code helper of Heimerdinger | Sonnet | subagent |
-| 💣 | **Ziggs** | Mechanical helper of Viktor: tests, regressivo, search, vault | Haiku | subagent |
-| 🔥 | **Rumble** | Mechanical helper of Heimerdinger: analyze, format, tests | Haiku | subagent |
+| Rune | Avatar | Agent | Role | Model | Session | Until 2.9.0 |
+|:---:|:---:|---|---|---|---|---|
+| <img src="assets/runes/odin-neon.svg" width="44" alt="rune of Odin"> | <img src="assets/avatars/still/odin.svg" width="56" alt="Odin avatar"> | **Odin** | Orchestrator: plans the version, writes the tickets, decides with you, runs the release. Never edits code | Opus | fixed | Swain |
+| <img src="assets/runes/heimdall-neon.svg" width="44" alt="rune of Heimdall"> | <img src="assets/avatars/still/heimdall.svg" width="56" alt="Heimdall avatar"> | **Heimdall** | Backend integrator: reviews and merges service PRs, owns the migration queue | Opus | fixed | Galio |
+| <img src="assets/runes/forseti-neon.svg" width="44" alt="rune of Forseti"> | <img src="assets/avatars/still/forseti.svg" width="56" alt="Forseti avatar"> | **Forseti** | App integrator: design fidelity, reviews and merges app PRs | Opus | fixed | Taric |
+| <img src="assets/runes/eitri-neon.svg" width="44" alt="rune of Eitri"> | <img src="assets/avatars/still/eitri.svg" width="56" alt="Eitri avatar"> | **Eitri** | Backend executor: plans and writes the service features | Opus | fixed | Viktor |
+| <img src="assets/runes/volundr-neon.svg" width="44" alt="rune of Völundr"> | <img src="assets/avatars/still/volundr.svg" width="56" alt="Völundr avatar"> | **Völundr** | App executor: plans and writes the Flutter screens | Opus | fixed | Heimerdinger |
+| <img src="assets/runes/mimir-neon.svg" width="44" alt="rune of Mímir"> | <img src="assets/avatars/still/mimir.svg" width="56" alt="Mímir avatar"> | **Mímir** | Full-stack AI: the assistant, calibration, pricing, the lab | Opus | fixed | Zilean |
+| <img src="assets/runes/bifrost-neon.svg" width="44" alt="rune of Bifröst"> | <img src="assets/avatars/still/bifrost.svg" width="56" alt="Bifröst avatar"> | **Bifröst** | Full-stack integrations: iFood, the WhatsApp bot, the landing, the alerts | Opus | on demand | Thresh |
+| <img src="assets/runes/bragi-neon.svg" width="44" alt="rune of Bragi"> | <img src="assets/avatars/still/bragi.svg" width="56" alt="Bragi avatar"> | **Bragi** | Marketing, design, PDFs and product copy | Sonnet | on demand | Lupin |
+| <img src="assets/runes/nidhoggr-neon.svg" width="44" alt="rune of Níðhöggr"> | <img src="assets/avatars/still/nidhoggr.svg" width="56" alt="Níðhöggr avatar"> | **Níðhöggr** | Dead code and refactor | Sonnet | on demand | Pyke |
+| <img src="assets/runes/brokkr-neon.svg" width="44" alt="rune of Brokkr"> | <img src="assets/avatars/still/brokkr.svg" width="56" alt="Brokkr avatar"> | **Brokkr** | Code helper of Eitri | Sonnet | subagent | Xayah |
+| <img src="assets/runes/egill-neon.svg" width="44" alt="rune of Egill"> | <img src="assets/avatars/still/egill.svg" width="56" alt="Egill avatar"> | **Egill** | Code helper of Völundr | Sonnet | subagent | Rakan |
+| <img src="assets/runes/grisnir-neon.svg" width="44" alt="rune of Grisnir"> | <img src="assets/avatars/still/grisnir.svg" width="56" alt="Grisnir avatar"> | **Grisnir** | Mechanical helper of Eitri: tests, regressivo, search, vault | Haiku | subagent | Ziggs |
+| <img src="assets/runes/gnjostr-neon.svg" width="44" alt="rune of Gnjóstr"> | <img src="assets/avatars/still/gnjostr.svg" width="56" alt="Gnjóstr avatar"> | **Gnjóstr** | Mechanical helper of Völundr: analyze, format, tests | Haiku | subagent | Rumble |
 
-A ticket passes six gates, and a failure goes back one gate: **Ready** (Swain) → **Build**, tests first
-(executor) → **Candidate** → **Review** (Galio or Taric; Lupin for text) → **Train** (merge in batches, one
-verification) → **Regressivo** (Ziggs, Rumble) → release, with your OK.
+The infrastructure has Norse names too: **Yggdrasil** is the vault (the tree that holds the worlds together),
+**Gleipnir** is the `agent-guard` hook (the thin chain that holds Fenrir), **Ratatoskr** carries the notifications
+(the squirrel that runs messages up and down the tree), and **Huginn and Muninn** are the PAINEL (Odin's ravens,
+thought and memory). See the crew alive, with eyes that follow the pointer: [the crew page](https://henriquemachine.github.io/RuneChest/).
+
+A ticket passes six gates, and a failure goes back one gate: **Ready** (Odin) → **Build**, tests first
+(executor) → **Candidate** → **Review** (Heimdall or Forseti; Bragi for text) → **Train** (merge in batches, one
+verification) → **Regressivo** (Grisnir, Gnjóstr) → release, with your OK.
 
 ## Tabs
+
+The agent tabs keep the current names until the 2.9.0 switch; then they show the runes and the Norse names.
 
 | Key | Tab | What is in it |
 |---|---|---|
