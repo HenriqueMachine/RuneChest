@@ -245,6 +245,9 @@ def main() -> None:
         dest = Path.home() / "Library" / "Fonts" / font.name
         shutil.copyfile(font, dest)
         print(f"installed -> {dest}")
+        if shutil.which("swift"):
+            import subprocess
+            subprocess.run(["swift", str(HERE / "register.swift"), str(dest)], check=False)
 
 
 PAGE = """<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
