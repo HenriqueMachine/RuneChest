@@ -2,7 +2,7 @@
 // Tabs by layer: 1 NVIM · 2 PAINEL · 3 ODIN · 4 BACKEND · 5 APP · 6 ESPECIALISTAS · 7 TRIPULAÇÃO · 8 AMBIENTE (Alt 1..8)
 // Odin starts with the layout. The other agent panes are suspended: ENTER starts the agent (on demand).
 // When a session ends, the pane shows the command again and ENTER starts a new one (one session per ticket).
-// The runes are the RuneChest Runes bind-runes (U+100000–U+10000C, assets/runes/codepoints.tsv; Ghostty maps them
+// The runes are the RuneChest Runes bind-runes (U+100000–U+10000D, assets/runes/codepoints.tsv; Ghostty maps them
 // with font-codepoint-map). Names, colours and layers: vault 11-Agentes/Identidade.md.
 
 layout {
@@ -66,23 +66,27 @@ layout {
         }
     }
 
-    tab name="􀀉􀀊􀀋􀀌 ESPECIALISTAS" {
+    // ESPECIALISTAS: Mímir │ Bifröst │ Frigg on top, Bragi │ Níðhöggr below (Frigg joined 18/11: product and design).
+    tab name="􀀉􀀊􀀍􀀋􀀌 ESPECIALISTAS" {
         pane split_direction="horizontal" {
             pane split_direction="vertical" {
                 pane name="􀀉 Mímir · IA full-stack" command="/Users/henriquepaixao/Foodbot/foodbot-ops/bin/agent" start_suspended=true {
-                args "mimir"
-            }
+                    args "mimir"
+                }
                 pane name="􀀊 Bifröst · integrações" command="/Users/henriquepaixao/Foodbot/foodbot-ops/bin/agent" start_suspended=true {
-                args "bifrost"
-            }
+                    args "bifrost"
+                }
+                pane name="􀀍 Frigg · produto e design" command="/Users/henriquepaixao/Foodbot/foodbot-ops/bin/agent" start_suspended=true {
+                    args "frigg"
+                }
             }
             pane split_direction="vertical" {
-                pane name="􀀋 Bragi · texto, design, PDFs" command="/Users/henriquepaixao/Foodbot/foodbot-ops/bin/agent" start_suspended=true {
-                args "bragi"
-            }
+                pane name="􀀋 Bragi · texto, marketing, PDFs" command="/Users/henriquepaixao/Foodbot/foodbot-ops/bin/agent" start_suspended=true {
+                    args "bragi"
+                }
                 pane name="􀀌 Níðhöggr · código morto e refatoração" command="/Users/henriquepaixao/Foodbot/foodbot-ops/bin/agent" start_suspended=true {
-                args "nidhoggr"
-            }
+                    args "nidhoggr"
+                }
             }
         }
     }

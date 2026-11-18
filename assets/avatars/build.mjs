@@ -103,6 +103,12 @@ const CREW = [
     eyes: { x: 50, y: 68, spacing: 17, scale: 1.1 },
   },
   {
+    // Frigg spins the clouds: a spindle with its whorl (product and design, 18/11).
+    id: "frigg", name: "Frigg", object: "roca", neon: "#b8ff3d",
+    path: ellipse(50, 56, 22, 27) + rect(46, 10, 8, 80, 4) + ellipse(50, 84, 19, 6) + ellipse(50, 12, 5.5),
+    eyes: { x: 50, y: 54, spacing: 16, scale: 1.1 },
+  },
+  {
     id: "nidhoggr", name: "Níðhöggr", object: "dragão", neon: "#ff7a3d",
     path: ellipse(42, 52, 26, 22) + rect(54, 47, 37, 22, 9) + rect(57, 65, 28, 9, 4.5) + rect(11, 62, 23, 26, 8) +
       beads([[28, 32, 7], [21, 26, 6], [15, 21, 5.5]]) + beads([[44, 30, 6.5], [41, 21, 5.5]]) +

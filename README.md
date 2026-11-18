@@ -93,6 +93,7 @@ column is the Runeterra name of 2.9.0 planning, kept for the history.
 | <img src="assets/runes/mimir-neon.svg" width="44" alt="rune of Mímir"> | <img src="assets/avatars/still/mimir.svg" width="56" alt="Mímir avatar"> | **Mímir** | Full-stack AI: the assistant, calibration, pricing, the lab | Opus | fixed | Zilean |
 | <img src="assets/runes/bifrost-neon.svg" width="44" alt="rune of Bifröst"> | <img src="assets/avatars/still/bifrost.svg" width="56" alt="Bifröst avatar"> | **Bifröst** | Full-stack integrations: iFood, the WhatsApp bot, the landing, the alerts | Opus | on demand | Thresh |
 | <img src="assets/runes/bragi-neon.svg" width="44" alt="rune of Bragi"> | <img src="assets/avatars/still/bragi.svg" width="56" alt="Bragi avatar"> | **Bragi** | Marketing, design, PDFs and product copy | Sonnet | on demand | Lupin |
+| <img src="assets/runes/frigg-neon.svg" width="44" alt="rune of Frigg"> | <img src="assets/avatars/still/frigg.svg" width="56" alt="Frigg avatar"> | **Frigg** | Product and design: specs, business rules, the boards and the UX of new screens | Opus | on demand | (new, 18/11) |
 | <img src="assets/runes/nidhoggr-neon.svg" width="44" alt="rune of Níðhöggr"> | <img src="assets/avatars/still/nidhoggr.svg" width="56" alt="Níðhöggr avatar"> | **Níðhöggr** | Dead code and refactor | Sonnet | on demand | Pyke |
 | <img src="assets/runes/brokkr-neon.svg" width="44" alt="rune of Brokkr"> | <img src="assets/avatars/still/brokkr.svg" width="56" alt="Brokkr avatar"> | **Brokkr** | Code helper of Eitri | Sonnet | subagent | Xayah |
 | <img src="assets/runes/egill-neon.svg" width="44" alt="rune of Egill"> | <img src="assets/avatars/still/egill.svg" width="56" alt="Egill avatar"> | **Egill** | Code helper of Völundr | Sonnet | subagent | Rakan |
@@ -125,7 +126,7 @@ One tab per layer (user decision 18/11). The tab names carry the bind-runes of t
 | Option+3 | ᚨ ODIN | Odin, the orchestrator. **The only agent that starts with the layout** |
 | Option+4 | ᛉᚲ BACKEND | Heimdall │ Eitri (Brokkr and Grisnir are Eitri's subagents) |
 | Option+5 | ᛏᚷ APP | Forseti │ Völundr (Egill and Gnjóstr are Völundr's subagents) |
-| Option+6 | ᛚᚱᚹᚺ ESPECIALISTAS | Mímir │ Bifröst on top, Bragi │ Níðhöggr below |
+| Option+6 | ᛚᚱᛈᚹᚺ ESPECIALISTAS | Mímir │ Bifröst │ Frigg on top, Bragi │ Níðhöggr below |
 | Option+7 | TRIPULAÇÃO | fzf menu of the whole crew (Enter starts a session, Ctrl-R resumes one) and the crew page with the real mood |
 | Option+8 | AMBIENTE | The local backend (`./gradlew dev`, 8080) and app (`scripts/dev.sh`, 5400). At most 2 environments on the Mac |
 

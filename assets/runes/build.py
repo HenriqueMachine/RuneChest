@@ -45,12 +45,14 @@ RUNES = {
     "ehwaz":    ("ᛖ", [[(26, 90), (26, 12), (50, 36), (74, 12), (74, 90)]]),
     "mannaz":   ("ᛗ", [[(26, 90), (26, 10), (74, 46)], [(74, 90), (74, 10), (26, 46)]]),
     "laguz":    ("ᛚ", [STAVE, [(50, 10), (72, 32)]]),
+    "perthro":  ("ᛈ", [STAVE, [(50, 12), (74, 28), (74, 44)], [(50, 88), (74, 72), (74, 56)]]),
     "othala":   ("ᛟ", [[(50, 10), (74, 38), (50, 66), (26, 38), (50, 10)], [(38, 52), (24, 90)], [(62, 52), (76, 90)]]),
     # Variants: the same rune moved up, down or to the left, so it does not hide inside the other rune of a bind.
     "algiz_high":  ("ᛉ", [STAVE, [(50, 40), (24, 12)], [(50, 40), (76, 12)]]),
     "hagalaz_h":   ("ᚺ", [STAVE, [(28, 60), (72, 84)]]),
     "hagalaz_low": ("ᚼ", [STAVE, [(28, 54), (72, 86)], [(72, 54), (28, 86)]]),
     "naudiz_high": ("ᚾ", [STAVE, [(32, 14), (68, 38)]]),
+    "fehu_left":   ("ᚠ", [STAVE, [(50, 40), (24, 18)], [(50, 62), (24, 40)]]),
     "wunjo_left":  ("ᚹ", [STAVE, [(50, 10), (26, 26), (50, 42)]]),
 }
 
@@ -71,6 +73,8 @@ CREW = [
     ("Bifröst",  "berkano",     "raidho",      "Integrações",                "Thresh",       "especialista", "#00ff9f"),
     ("Bragi",    "berkano",     "wunjo_left",  "Texto, design, PDFs",        "Lupin",        "especialista", "#c77dff"),
     ("Níðhöggr", "naudiz_high", "hagalaz_low", "Código morto e refatoração", "Pyke",         "especialista", "#ff7a3d"),
+    # Added 18/11 at the end, so the codepoints of the others do not move: Frigg is U+10000D.
+    ("Frigg",    "fehu_left",   "perthro",     "Produto e design",           "-",            "especialista", "#b8ff3d"),
 ]
 
 

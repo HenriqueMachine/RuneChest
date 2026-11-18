@@ -34,6 +34,7 @@ Runeterra names (Swain, Galio, …). Nothing changes in the middle of 2.8.0.
 | ᛚ Laguz | **Mímir** | AI full-stack: the assistant, calibration, pricing, the lab | Zilean | The wise one of the well of memory, who counsels Odin; Laguz is the water of the well |
 | ᚱ Raidho | **Bifröst** | Integrations full-stack: iFood, the WhatsApp bot, the landing, the alerts | Thresh | The bridge between the worlds; Raidho is the journey |
 | ᚹ Wunjo | **Bragi** | Marketing, design, PDFs, product copy | Lupin | The god of poetry and eloquence |
+| ᛈ Perthro | **Frigg** | Product and design: specs, business rules, boards, UX (added 18/11) | — | Odin's wife, who knows every fate and does not tell it; she spins the clouds. Perthro is the rune of fate |
 | ᚺ Hagalaz | **Níðhöggr** | Dead code and refactor | Pyke | The dragon that gnaws the dead roots of the tree; Hagalaz is the hail that clears |
 
 ## The infrastructure
