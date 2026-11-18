@@ -1,4 +1,4 @@
-// Deepdeck · layout "deepdeck" — FoodBot with the Runeterra agents
+// RuneChest · layout "runechest" — FoodBot with the Runeterra agents
 // Tabs: 1 NVIM · 2 PAINEL · 3 BACKEND · 4 APP · 5 SWAIN · 6 EXTRA · 7 AGENTES  (Alt 1..7)
 // Agent panes are suspended: they show the command, and ENTER starts the agent (on demand, user decision 17/11).
 // When a session ends, the pane shows the command again and ENTER starts a new one (one session per ticket).
@@ -25,14 +25,14 @@ layout {
         pane split_direction="vertical" {
             pane command="nvim" size="70%" focus=true
             pane name="GUIA" command="bash" size="30%" {
-                args "/Users/henriquepaixao/Github/Deepdeck/scripts/deepdeck-guide.sh"
+                args "/Users/henriquepaixao/Github/RuneChest/scripts/runechest-guide.sh"
             }
         }
     }
 
     tab name="PAINEL" {
         pane command="bash" borderless=true {
-            args "/Users/henriquepaixao/Github/Deepdeck/scripts/deepdeck-panel.sh"
+            args "/Users/henriquepaixao/Github/RuneChest/scripts/runechest-panel.sh"
         }
     }
 
@@ -70,12 +70,12 @@ layout {
     }
 
     tab name="EXTRA" {
-        pane name="⛓️ Thresh · 🎩 Lupin · 🪝 Pyke — sob demanda: deepdeck agent <nome>"
+        pane name="⛓️ Thresh · 🎩 Lupin · 🪝 Pyke — sob demanda: runechest agent <nome>"
     }
 
     tab name="AGENTES" {
         pane command="bash" borderless=true {
-            args "/Users/henriquepaixao/Github/Deepdeck/scripts/deepdeck-agents.sh"
+            args "/Users/henriquepaixao/Github/RuneChest/scripts/runechest-agents.sh"
         }
     }
 }

@@ -1,6 +1,6 @@
-# Deepdeck
+# RuneChest
 
-**One developer, a team of agents.** Deepdeck is the personal development environment of a solo founder: the
+**One developer, a team of agents.** RuneChest is the personal development environment of a solo founder: the
 terminal, the editor and a crew of Claude Code agents in one calm screen. You decide what to build and you review
 what comes back. The agents plan, write, test and keep the paperwork, each one with its own role.
 
@@ -32,7 +32,7 @@ From these limits come the four rules of the crew:
 
 ```mermaid
 flowchart TB
-    subgraph Screen["Deepdeck screen"]
+    subgraph Screen["RuneChest screen"]
         G[Ghostty<br/>font, palette, GPU]
         Z[Zellij<br/>tabs per role, key bar]
         N[Neovim + GUIA<br/>LazyVim, command guide]
@@ -67,8 +67,8 @@ flowchart TB
 | Terminal | Ghostty | Native and light on the GPU; JetBrains Mono 16, soft palette, Option as Alt |
 | Multiplexer | Zellij | One tab per role, agent panes that start suspended (ENTER starts the agent), the key bar |
 | Editor | Neovim (LazyVim) | The code, with the GUIA pane next to it while you learn the keys |
-| Panel | `scripts/deepdeck-panel.sh` | Agents and their status, the diary, the heavy lanes, open PRs, tokens of the day |
-| Agents | Claude Code | One session per role, started with `deepdeck agent <name>` or the AGENTES menu |
+| Panel | `scripts/runechest-panel.sh` | Agents and their status, the diary, the heavy lanes, open PRs, tokens of the day |
+| Agents | Claude Code | One session per role, started with `runechest agent <name>` or the AGENTES menu |
 | Memory | Obsidian vault, git | One note per agent (status, task, PR, block, next step); the source of truth |
 | Harness | hooks, `heavy` | Hard limits (no merge to main, no secrets), one verification per PR, notifications |
 
@@ -112,7 +112,7 @@ verification) → **Regressivo** (Ziggs, Rumble) → release, with your OK.
 Other keys, in every Zellij mode (also inside Neovim): **Option+arrows** go to the next pane, **Option+g** shows
 the focused pane on the full screen (it hides the guide) and back. The key bar at the bottom shows the rest.
 
-## Palette (Deepdeck soft)
+## Palette (RuneChest soft)
 
 | Role | Colour |
 |---|---|
@@ -128,8 +128,8 @@ the focused pane on the full screen (it hides the guide) and back. The key bar a
 | Path | What it is |
 |---|---|
 | `stow/ghostty`, `stow/zellij`, `stow/nvim` | The screen: terminal, multiplexer (theme, keys, layouts), editor |
-| `stow/zsh`, `stow/git`, `stow/starship` | The shell: the `deepdeck` command, aliases, prompt, git |
-| `scripts/deepdeck-*.sh` | Panel, agent menu, guide, macOS notification |
+| `stow/zsh`, `stow/git`, `stow/starship` | The shell: the `runechest` command, aliases, prompt, git |
+| `scripts/runechest-*.sh` | Panel, agent menu, guide, macOS notification |
 | `scripts/00-*.sh` … `40-*.sh`, `install.sh`, `update.sh` | Install and update (Homebrew, stow, Zellij plugins) |
 | `docs/guia-nvim.txt` | The Neovim guide. Format: `## SECTION` and `key \| what it does` |
 | `library/` | Cheat sheets, notes and snippets |
@@ -139,15 +139,15 @@ the focused pane on the full screen (it hides the guide) and back. The key bar a
 
 ```sh
 ./install.sh          # Homebrew, the Brewfile, stow, the Zellij plugins
-deepdeck              # open or go back to the deepdeck session
-deepdeck agents       # the agent menu
-deepdeck agent viktor # one agent in this pane
-deepdeck reset        # delete the session (a new layout applies on the next open)
-deepdeck help         # all commands
+runechest              # open or go back to the runechest session
+runechest agents       # the agent menu
+runechest agent viktor # one agent in this pane
+runechest reset        # delete the session (a new layout applies on the next open)
+runechest help         # all commands
 ```
 
 The agent launcher (`foodbot-ops/bin/agent`) and the agent files (`.claude/agents/*.md`) live in the project
-repository, not here: Deepdeck is the screen and the habits; the project brings its own crew.
+repository, not here: RuneChest is the screen and the habits; the project brings its own crew.
 
 ## History
 

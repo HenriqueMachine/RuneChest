@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Deepdeck runes, draft 3: Mad Max cuts and neon by layer.
+"""RuneChest runes, draft 3: Mad Max cuts and neon by layer.
 
 One bind-rune per agent: the rune of the first letter + the rune of the role, on the shared central stave.
 Each stroke is a filled polygon (not a line), so it can have:
@@ -8,10 +8,10 @@ Each stroke is a filled polygon (not a line), so it can have:
     runes look hand-cut but stay the same at each build.
 
 Outputs, in this folder:
-  <name>.svg       one colour (currentColor), for the terminal font (the glyphs of Deepdeck Runes).
+  <name>.svg       one colour (currentColor), for the terminal font (the glyphs of RuneChest Runes).
   <name>-neon.svg  the neon colour of the agent's layer with a glow, for the README, the site and the slides.
   preview.html     the comparison page.
-  DeepdeckRunes.ttf  the terminal font: one glyph per agent from U+100000 (Plane 16 private use area, so no clash
+  RuneChestRunes.ttf  the terminal font: one glyph per agent from U+100000 (Plane 16 private use area, so no clash
                    with the Nerd Font). Needs fontTools (`.venv/bin/pip install fonttools`).
 Run: .venv/bin/python assets/runes/build.py [--install]   (--install copies the font to ~/Library/Fonts)
 """
@@ -196,14 +196,14 @@ def build_font(glyphs: list) -> Path:
             g.flags[0] |= 0x40   # OVERLAP_SIMPLE: the strokes overlap, draw them as one shape
     fb.setupHorizontalMetrics({g: (EM, 0) for g in order})
     fb.setupHorizontalHeader(ascent=800, descent=-200)
-    fb.setupNameTable({"familyName": "Deepdeck Runes", "styleName": "Regular",
-                       "uniqueFontIdentifier": "Deepdeck Runes Regular 1.0", "fullName": "Deepdeck Runes",
-                       "psName": "DeepdeckRunes-Regular", "version": "Version 1.0"})
+    fb.setupNameTable({"familyName": "RuneChest Runes", "styleName": "Regular",
+                       "uniqueFontIdentifier": "RuneChest Runes Regular 1.0", "fullName": "RuneChest Runes",
+                       "psName": "RuneChestRunes-Regular", "version": "Version 1.0"})
     fb.setupOS2(sTypoAscender=800, sTypoDescender=-200, usWinAscent=800, usWinDescent=200,
-                fsType=0, achVendID="DPDK")
+                fsType=0, achVendID="RNCH")
     fb.setupPost(isFixedPitch=1)
     fb.font["head"].created = fb.font["head"].modified = 3_846_528_000   # fixed (2025-11-21), so a rebuild is the same file
-    out = HERE / "DeepdeckRunes.ttf"
+    out = HERE / "RuneChestRunes.ttf"
     fb.save(str(out))
     return out
 
@@ -251,7 +251,7 @@ def main() -> None:
 
 
 PAGE = """<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1"><title>Runas Deepdeck</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Runas RuneChest</title>
 <style>
 :root{--bg:#0e0e14;--surface:#13131b;--line:#2e2e3e;--text:#d8dae5;--dim:#878ca6}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.5 "JetBrainsMono Nerd Font",ui-monospace,monospace;padding:32px 16px}
@@ -269,7 +269,7 @@ figcaption{font-size:12px;color:var(--dim)}
 .tab{display:flex;align-items:center;gap:6px;font-size:var(--s);color:var(--text)}.tab svg{width:var(--s);height:var(--s);color:var(--c)}
 .tab i{font-family:"Monaspace Radon",ui-monospace,monospace}
 </style></head><body>
-<header><h1>Runas do Deepdeck · rascunho 3</h1>
+<header><h1>Runas do RuneChest · rascunho 3</h1>
 <p>Traços Mad Max: pontas cortadas em diagonal e entalhes em V. Neon por camada, com brilho fora do terminal. Embaixo de cada runa: as duas runas da combinação e como fica na aba (14, 18 e 24 px).</p></header>
 <main>
 {{CARDS}}

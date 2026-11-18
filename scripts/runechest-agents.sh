@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# deepdeck-agents — the AGENTES tab: pick a Runeterra agent and start it, or resume an old session.
+# runechest-agents — the AGENTES tab: pick a Runeterra agent and start it, or resume an old session.
 #   Enter   start a new session as that agent (foodbot-ops/bin/agent <name>)
 #   Ctrl-R  resume a session of that agent (claude --resume, the picker of Claude Code)
 #   Esc     quit
 # After the session ends, the menu comes back.
 set -uo pipefail
-# shellcheck source=deepdeck-lib.sh
-. "$(dirname "$0")/deepdeck-lib.sh"
+# shellcheck source=runechest-lib.sh
+. "$(dirname "$0")/runechest-lib.sh"
 
 ROOT=${FOODBOT_ROOT:-$HOME/Foodbot}
 AGENTS_DIR=$ROOT/.claude/agents
@@ -24,15 +24,15 @@ list() {
   done
 }
 
-command -v fzf >/dev/null || { echo "deepdeck-agents: fzf is not installed (brew install fzf)" >&2; exit 1; }
-[ -d "$AGENTS_DIR" ] || { echo "deepdeck-agents: $AGENTS_DIR not found" >&2; exit 1; }
+command -v fzf >/dev/null || { echo "runechest-agents: fzf is not installed (brew install fzf)" >&2; exit 1; }
+[ -d "$AGENTS_DIR" ] || { echo "runechest-agents: $AGENTS_DIR not found" >&2; exit 1; }
 
 while true; do
   out=$(list | fzf --ansi --reverse --no-sort --prompt 'agente › ' \
     --header $'Enter: nova sessão · Ctrl-R: retomar · Esc: sair' \
     --expect ctrl-r \
     --color 'fg:#d8dae5,bg:#0e0e14,hl:#4cc9d6,fg+:#eef0f6,bg+:#2a2a3a,hl+:#e6c84c,prompt:#e8457a,pointer:#e6c84c,header:#878ca6,border:#e8457a' \
-    --border rounded --border-label ' DEEPDECK · AGENTES ') || exit 0
+    --border rounded --border-label ' RUNECHEST · AGENTES ') || exit 0
   key=$(sed -n 1p <<<"$out")
   name=$(sed -n 2p <<<"$out" | awk '{print $2}')
   [ -n "$name" ] || exit 0

@@ -1,4 +1,4 @@
-# Guia do Nvim · Deepdeck
+# Guia do Nvim · RuneChest
 # Formato: "## SEÇÃO" e "tecla | o que faz". O painel GUIA lê este arquivo.
 # ␣ = Espaço (a tecla líder do LazyVim). C- = Ctrl. Edite à vontade.
 

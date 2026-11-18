@@ -10,12 +10,12 @@ Runeterra names (Swain, Galio, …). Nothing changes in the middle of 2.8.0.
 2. **Runes: our own bind-runes (approved 17/11, draft 3).** One bind-rune per agent (the rune of the first letter +
    the rune of the role), with Mad Max cuts (chamfered ends, V notches) and the neon of the layer. They live in
    `assets/runes/`: `<name>.svg` (one colour, for the font), `<name>-neon.svg` (glow, for the README, the site and the
-   slides), `preview.html`, and the `Deepdeck Runes` font (U+100000 to U+10000C, mapped in Ghostty with
-   `font-codepoint-map`). `deepdeck runas` shows them. Build: `.venv/bin/python assets/runes/build.py --install`.
+   slides), `preview.html`, and the `RuneChest Runes` font (U+100000 to U+10000C, mapped in Ghostty with
+   `font-codepoint-map`). `runechest runas` shows them. Build: `.venv/bin/python assets/runes/build.py --install`.
    The Unicode Elder Futhark runes stay the fallback where the font is not installed (GitHub, Obsidian).
 3. **Typography in the terminal: Monaspace.** Ghostty draws italic with Monaspace Radon. The scripts print the agent
    names in italic, so a name looks different from the code around it.
-4. **Scope: everything, at the start of 2.9.0.** Deepdeck, `.claude/agents`, the skills, `bin/agent`, the hooks, the
+4. **Scope: everything, at the start of 2.9.0.** RuneChest, `.claude/agents`, the skills, `bin/agent`, the hooks, the
    vault (`11-Agentes`, `Identidade`, `Arquitetura-Agentes`) and the README change together, when the sessions restart.
 
 ## The crew
@@ -42,7 +42,7 @@ Runeterra names (Swain, Galio, …). Nothing changes in the middle of 2.8.0.
 |---|---|---|
 | **Yggdrasil** | The Obsidian vault (one note per agent) | The tree that holds the nine worlds together |
 | **Gleipnir** | The `agent-guard` hook (no merge to main, no secrets, no production writes) | The thin chain that holds Fenrir: the hard limits |
-| **Ratatoskr** | The notifications (`deepdeck-notify.sh`) | The squirrel that carries the messages up and down the tree |
+| **Ratatoskr** | The notifications (`runechest-notify.sh`) | The squirrel that carries the messages up and down the tree |
 | **Huginn e Muninn** | The PAINEL tab | Odin's ravens, thought and memory, who fly out and report back |
 
 ## Rename checklist (start of 2.9.0)
@@ -54,7 +54,7 @@ scripts read it.
    (rename the files, keep the history in the note), `Agentes.base`.
 2. FoodBot: `.claude/agents/<name>.md` (the contracts), the skills (`/<agent>-<action>` and the ability names in the
    descriptions), `foodbot-ops/bin/agent`, `bin/agent-context`, `bin/agent-guard` (the allowed mergers), `CLAUDE.md`.
-3. Deepdeck: the `deepdeck` layout (tab names with the runes), `deepdeck-panel.sh` and `deepdeck-agents.sh` (italic
+3. RuneChest: the `runechest` layout (tab names with the runes), `runechest-panel.sh` and `runechest-agents.sh` (italic
    names), the README crew table.
 4. GitHub signatures: `OK (ᛉ Heimdall)` replaces `OK (🗿 Galio)`.
 5. Tabs and scripts: print the rune of `assets/runes/codepoints.tsv` before each agent name.

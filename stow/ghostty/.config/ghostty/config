@@ -1,5 +1,5 @@
-# Deepdeck · Ghostty — the minimum. Zellij does the tabs, panes and status bar.
-# Palette (Deepdeck soft, 17/11): near black #0e0e14 · text #d8dae5 · magenta #e8457a (active) · cyan #4cc9d6
+# RuneChest · Ghostty — the minimum. Zellij does the tabs, panes and status bar.
+# Palette (RuneChest soft, 17/11): near black #0e0e14 · text #d8dae5 · magenta #e8457a (active) · cyan #4cc9d6
 # · yellow #e6c84c · dim #7a7f96. Less saturated than the first neon palette, for long sessions.
 
 # Font: JetBrains Mono (tall, open letters), 16 pt, 10 % more line height
@@ -11,8 +11,8 @@ adjust-cell-height = 10%
 # agent menu are printed in italic, so they stand out from the code. Code comments in italic use it too.
 font-family-italic = "Monaspace Radon"
 font-family-bold-italic = "Monaspace Radon"
-# The Deepdeck runes (assets/runes, one glyph per agent from U+100000) come from our own font.
-font-codepoint-map = U+100000-U+1000FF=Deepdeck Runes
+# The RuneChest runes (assets/runes, one glyph per agent from U+100000) come from our own font.
+font-codepoint-map = U+100000-U+1000FF=RuneChest Runes
 
 # Colours: near black, soft contrast
 background = #0e0e14

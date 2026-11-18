@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
-# deepdeck-panel — the PAINEL tab, in two columns (user decision 17/11):
+# runechest-panel — the PAINEL tab, in two columns (user decision 17/11):
 #   left:  AGENTES (vault 11-Agentes, emoji and colour from Identidade.md) and DIÁRIO (13-Diario of today)
 #   right: MÁQUINA (heavy lanes), PRs ABERTOS (cache 2 min), TOKENS HOJE (ccusage)
-# Refreshes every DEEPDECK_PANEL_SECONDS (default 20). Read only. `--once` draws one time (for tests).
+# Refreshes every RUNECHEST_PANEL_SECONDS (default 20). Read only. `--once` draws one time (for tests).
 set -uo pipefail
-# shellcheck source=deepdeck-lib.sh
-. "$(dirname "$0")/deepdeck-lib.sh"
+# shellcheck source=runechest-lib.sh
+. "$(dirname "$0")/runechest-lib.sh"
 
 HEAVY=$FOODBOT_ROOT/foodbot-ops/bin/heavy
-EVERY=${DEEPDECK_PANEL_SECONDS:-20}
-CACHE=${TMPDIR:-/tmp}/deepdeck-panel
+EVERY=${RUNECHEST_PANEL_SECONDS:-20}
+CACHE=${TMPDIR:-/tmp}/runechest-panel
 mkdir -p "$CACHE"
 M=$DD_M; C=$DD_C; Y=$DD_Y; G=$DD_G; W=$DD_W; D=$DD_D; B=$DD_B; R=$DD_R
 
@@ -28,7 +28,7 @@ agents() { # width
     today=$(date +%Y-%m-%d)
     for f in "$DD_VAULT"/11-Agentes/*.md; do
         name=$(basename "$f" .md)
-        case $name in README|Arquitetura-Agentes|Protocolo-Comunicacao|Deepdeck|00-Indice-Agentes|Identidade) continue ;; esac
+        case $name in README|Arquitetura-Agentes|Protocolo-Comunicacao|RuneChest|00-Indice-Agentes|Identidade) continue ;; esac
         st=$(awk -F': *' '/^---$/{n++; next} n==1 && $1=="status"{gsub(/"/,"",$2); print $2; exit}' "$f")
         task=$(awk '/^---$/{n++; next} n==1 && /^tarefa:/{sub(/^tarefa: */,""); gsub(/"/,""); print; exit}' "$f")
         upd=$(awk -F': *' '/^---$/{n++; next} n==1 && $1=="atualizado"{gsub(/"/,"",$2); print $2; exit}' "$f")
@@ -109,12 +109,12 @@ place() {
 
 draw() {
     local cols rows lw rw rc row
-    cols=${DEEPDECK_COLS:-$(tput cols 2>/dev/null || echo 120)}; rows=${DEEPDECK_ROWS:-$(tput lines 2>/dev/null || echo 40)}
+    cols=${RUNECHEST_COLS:-$(tput cols 2>/dev/null || echo 120)}; rows=${RUNECHEST_ROWS:-$(tput lines 2>/dev/null || echo 40)}
     lw=$(( cols * 58 / 100 )); rw=$(( cols - lw - 3 )); rc=$(( lw + 3 ))
     local L1 L2 R1 R2 R3
     L1=$(agents "$lw"); L2=$(diary "$lw"); R1=$(machine "$rw"); R2=$(prs "$rw"); R3=$(tokens)
     printf '\e[H\e[2J'
-    printf '\e[1;1H%s%s▓▒░ DEEPDECK %s%s· FoodBot%s' "$M" "$B" "$R" "$C" "$R"
+    printf '\e[1;1H%s%s▓▒░ RUNECHEST %s%s· FoodBot%s' "$M" "$B" "$R" "$C" "$R"
     printf '\e[1;%dH%s%s%s%s' "$(( cols - 5 ))" "$Y" "$B" "$(date '+%H:%M')" "$R"
     row=3
     place 1 $row < <(head_line "AGENTES" "cinza = sem atualização hoje" "$lw"); row=$NEXT_ROW

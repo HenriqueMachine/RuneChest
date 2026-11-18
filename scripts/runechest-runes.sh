@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# deepdeck-runes — shows the Norse crew: the rune (Deepdeck Runes font), the name in italic (Monaspace Radon) and the
+# runechest-runes — shows the Norse crew: the rune (RuneChest Runes font), the name in italic (Monaspace Radon) and the
 # neon of the layer. It reads assets/runes/codepoints.tsv (written by assets/runes/build.py).
 set -u
 DIR=$(cd "$(dirname "$0")/.." && pwd)
-# shellcheck source=deepdeck-lib.sh
-. "$DIR/scripts/deepdeck-lib.sh"
+# shellcheck source=runechest-lib.sh
+. "$DIR/scripts/runechest-lib.sh"
 TABLE=$DIR/assets/runes/codepoints.tsv
 # printf %-10s counts bytes; "Völundr" has more bytes than letters. Pad by letters (needs a UTF-8 locale).
 case "${LC_ALL:-${LC_CTYPE:-${LANG:-}}}" in *UTF-8*|*utf8*) ;; *) export LC_ALL=en_US.UTF-8 ;; esac

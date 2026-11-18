@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# deepdeck-lib — shared helpers for the Deepdeck scripts. Source it; do not run it.
+# runechest-lib — shared helpers for the RuneChest scripts. Source it; do not run it.
 # shellcheck disable=SC2034  # the variables are used by the scripts that source this file
 # Agent identity (emoji, colour) comes from ONE place: the vault note 11-Agentes/Identidade.md.
 

@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# deepdeck-guide — the GUIA pane next to nvim: shows docs/guia-nvim.txt with the Deepdeck colours.
+# runechest-guide — the GUIA pane next to nvim: shows docs/guia-nvim.txt with the RuneChest colours.
 # Scroll with j/k, the arrows or the mouse; q draws it again for the new pane width (the pane does not close).
 set -u
 DIR=$(cd "$(dirname "$0")/.." && pwd)
-# shellcheck source=deepdeck-lib.sh
-. "$DIR/scripts/deepdeck-lib.sh"
-GUIDE=${DEEPDECK_GUIDE:-$DIR/docs/guia-nvim.txt}
+# shellcheck source=runechest-lib.sh
+. "$DIR/scripts/runechest-lib.sh"
+GUIDE=${RUNECHEST_GUIDE:-$DIR/docs/guia-nvim.txt}
 
 render() {
     local width=$(( $(tput cols 2>/dev/null || echo 40) - 13 ))

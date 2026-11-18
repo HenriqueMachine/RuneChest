@@ -60,8 +60,8 @@ alias ....='cd ../../..'
 alias c='clear'
 alias reload='exec zsh'
 
-export DEEPDECK_DIR="${DEEPDECK_DIR:-$HOME/Github/Deepdeck}"
-export ANTARES_DIR="${ANTARES_DIR:-$DEEPDECK_DIR}"   # old name, kept for the scripts
+export RUNECHEST_DIR="${RUNECHEST_DIR:-$HOME/Github/RuneChest}"
+export ANTARES_DIR="${ANTARES_DIR:-$RUNECHEST_DIR}"   # old name, kept for the scripts
 
 # entra na coleção Bruno do projeto (rode `bru run <req.bru>` depois)
 _antares_bruno() {
@@ -75,18 +75,18 @@ _antares_bruno() {
   cd "$dir" && { print "em $dir — rode:  bru run <req.bru>  (ou: bru run . --env local)"; ls; }
 }
 
-# deepdeck — mini-CLI do ambiente (antes "antares")
-deepdeck() {
+# runechest — mini-CLI do ambiente (antes "deepdeck" e "antares")
+runechest() {
   case "$1" in
-    open|"")      [[ -z "$1" && -n "$ZELLIJ" ]] && { deepdeck help; return; }
-                  _zj_open deepdeck deepdeck ;;
-    agents|ag)    bash "$DEEPDECK_DIR/scripts/deepdeck-agents.sh" ;;
-    agent|a)      [[ -n "$2" ]] || { print "uso: deepdeck agent <nome>"; return 1; }
+    open|"")      [[ -z "$1" && -n "$ZELLIJ" ]] && { runechest help; return; }
+                  _zj_open runechest runechest ;;
+    agents|ag)    bash "$RUNECHEST_DIR/scripts/runechest-agents.sh" ;;
+    agent|a)      [[ -n "$2" ]] || { print "uso: runechest agent <nome>"; return 1; }
                   "$HOME/Foodbot/foodbot-ops/bin/agent" "${@:2}" ;;
-    panel|painel) bash "$DEEPDECK_DIR/scripts/deepdeck-panel.sh" ;;
-    runas|runes)  bash "$DEEPDECK_DIR/scripts/deepdeck-runes.sh" ;;
-    reset)        zellij kill-session deepdeck 2>/dev/null; zellij delete-session deepdeck 2>/dev/null
-                  print "sessão deepdeck removida — 'deepdeck open' cria de novo" ;;
+    panel|painel) bash "$RUNECHEST_DIR/scripts/runechest-panel.sh" ;;
+    runas|runes)  bash "$RUNECHEST_DIR/scripts/runechest-runes.sh" ;;
+    reset)        zellij kill-session runechest 2>/dev/null; zellij delete-session runechest 2>/dev/null
+                  print "sessão runechest removida — 'runechest open' cria de novo" ;;
     dev)          dev ;;
     work)         work ;;
     flutter|fl)   fdev ;;
@@ -101,13 +101,13 @@ deepdeck() {
     bruno|api)    _antares_bruno "${@:2}" ;;
     cd)           cd "$ANTARES_DIR" ;;
     help|-h|--help)
-      print "deepdeck — ambiente FoodBot (Ghostty + Zellij + agentes Runeterra)"
-      print "  open      abre ou volta para a sessão deepdeck (NVIM · PAINEL · BACKEND · APP · SWAIN · EXTRA · AGENTES)"
+      print "runechest — ambiente FoodBot (Ghostty + Zellij + agentes Runeterra)"
+      print "  open      abre ou volta para a sessão runechest (NVIM · PAINEL · BACKEND · APP · SWAIN · EXTRA · AGENTES)"
       print "  agents    menu dos agentes (Enter: nova sessão · Ctrl-R: retomar)"
-      print "  agent N   abre o agente N aqui (ex.: deepdeck agent thresh)"
+      print "  agent N   abre o agente N aqui (ex.: runechest agent thresh)"
       print "  panel     o painel de métricas neste painel"
       print "  runas     a tripulação nórdica: runas, nomes e cores (2.9.0)"
-      print "  reset     apaga a sessão deepdeck (o layout novo vale na próxima)"
+      print "  reset     apaga a sessão runechest (o layout novo vale na próxima)"
       print "  dev       o layout antigo (editor + terminais + lib)"
       print "  work      Foodbot + CourtHub em paralelo (5 tabs)"
       print "  flutter   layout Flutter"
@@ -119,10 +119,13 @@ deepdeck() {
       print "  estudos   abre o vault Codex de Estudos (Obsidian)"
       print "  docker    lazydocker (containers dos projetos)"
       print "  health    watch de health do CourtHub (Actuator)"
-      print "  bruno     entra na coleção Bruno (deepdeck bruno <fb|ch>)"
+      print "  bruno     entra na coleção Bruno (runechest bruno <fb|ch>)"
       print "  cd        vai para o repositório"
       ;;
-    *) print "deepdeck: subcomando '$1' desconhecido — veja 'deepdeck help'"; return 1 ;;
+    *) print "runechest: subcomando '$1' desconhecido — veja 'runechest help'"; return 1 ;;
   esac
 }
-alias antares='deepdeck'   # nome antigo, sai em 24/11
+alias antares='runechest'   # nome antigo, sai em 24/11
+
+# Old name, kept until 24/11/2026: deepdeck -> runechest
+alias deepdeck=runechest

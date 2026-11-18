@@ -1,6 +1,6 @@
-// Deepdeck · Zellij — cyberpunk, high contrast (ember-dark kept below as a fallback)
+// RuneChest · Zellij — cyberpunk, high contrast (ember-dark kept below as a fallback)
 
-theme "deepdeck"
+theme "runechest"
 default_layout "compact"
 default_shell "zsh"
 
@@ -64,7 +64,7 @@ keybinds {
 // Ember Dark — carvão quente + âmbar dourado + lavanda
 // Acento: #e8a020 (âmbar) · secundária: #a48ca1 (lavanda) · green: #87a987
 themes {
-    deepdeck {
+    runechest {
         bg "#0e0e14"
         fg "#d8dae5"
         black "#0e0e14"
