@@ -47,6 +47,7 @@ keybinds {
         bind "Alt 5" { GoToTab 5; }
         bind "Alt 6" { GoToTab 6; }
         bind "Alt 7" { GoToTab 7; }
+        bind "Alt 8" { GoToTab 8; }
     }
     shared_except "locked" {
         bind "Ctrl h" { MoveFocusOrTab "Left"; }

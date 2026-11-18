@@ -1,15 +1,15 @@
-// RuneChest · layout "runechest" — FoodBot with the Runeterra agents
-// Tabs: 1 NVIM · 2 PAINEL · 3 BACKEND · 4 APP · 5 SWAIN · 6 EXTRA · 7 AGENTES  (Alt 1..7)
-// Agent panes are suspended: they show the command, and ENTER starts the agent (on demand, user decision 17/11).
+// RuneChest · layout "runechest" — FoodBot with the Norse crew (2.9.0, user decisions 17–18/11)
+// Tabs by layer: 1 NVIM · 2 PAINEL · 3 ODIN · 4 BACKEND · 5 APP · 6 ESPECIALISTAS · 7 TRIPULAÇÃO · 8 AMBIENTE (Alt 1..8)
+// Odin starts with the layout. The other agent panes are suspended: ENTER starts the agent (on demand).
 // When a session ends, the pane shows the command again and ENTER starts a new one (one session per ticket).
-// Emoji and colours: vault 11-Agentes/Identidade.md.
+// The runes are the RuneChest Runes bind-runes (U+100000–U+10000C, assets/runes/codepoints.tsv; Ghostty maps them
+// with font-codepoint-map). Names, colours and layers: vault 11-Agentes/Identidade.md.
 
 layout {
     cwd "/Users/henriquepaixao/Foodbot"
 
     default_tab_template {
         // Native tab bar: zjstatus does not render on Zellij 0.44.3 (the same fix as work.kdl, 08e3020).
-        // The heavy lanes and the clock are in the PAINEL tab.
         pane size=1 borderless=true {
             plugin location="zellij:tab-bar"
         }
@@ -21,7 +21,7 @@ layout {
     }
 
     // NVIM: the editor (70 %) and the GUIA (30 %, docs/guia-nvim.txt). Option+arrow goes between them; Option+g hides the guide.
-    tab name="NVIM" focus=true {
+    tab name="NVIM" {
         pane split_direction="vertical" {
             pane command="nvim" size="70%" focus=true
             pane name="GUIA" command="bash" size="30%" {
@@ -30,52 +30,83 @@ layout {
         }
     }
 
+    // PAINEL (Huginn e Muninn): the crew and the diary on the left; machine, train, PRs and tokens on the right.
     tab name="PAINEL" {
         pane command="bash" borderless=true {
             args "/Users/henriquepaixao/Github/RuneChest/scripts/runechest-panel.sh"
         }
     }
 
-    tab name="🗿⚙️ BACKEND" {
-        pane split_direction="vertical" {
-            pane name="🗿 Galio · integrador backend" command="/Users/henriquepaixao/Foodbot/foodbot-ops/bin/agent" start_suspended=true {
-                args "galio"
+    // Odin, the orchestrator: the only agent that starts with the layout (user decision 18/11).
+    tab name="􀀀 ODIN" focus=true {
+        pane name="􀀀 Odin · orquestrador" command="/Users/henriquepaixao/Foodbot/foodbot-ops/bin/agent" {
+                args "odin"
             }
-            pane name="⚙️ Viktor · executor backend" command="/Users/henriquepaixao/Foodbot/foodbot-ops/bin/agent" start_suspended=true {
-                args "viktor"
+    }
+
+    tab name="􀀁􀀃 BACKEND" {
+        pane split_direction="vertical" {
+            pane name="􀀁 Heimdall · integrador backend" command="/Users/henriquepaixao/Foodbot/foodbot-ops/bin/agent" start_suspended=true {
+                args "heimdall"
+            }
+            pane name="􀀃 Eitri · executor backend" command="/Users/henriquepaixao/Foodbot/foodbot-ops/bin/agent" start_suspended=true {
+                args "eitri"
             }
         }
     }
 
-    tab name="💎🔧 APP" {
+    tab name="􀀂􀀄 APP" {
         pane split_direction="vertical" {
-            pane name="💎 Taric · integrador app" command="/Users/henriquepaixao/Foodbot/foodbot-ops/bin/agent" start_suspended=true {
-                args "taric"
+            pane name="􀀂 Forseti · integrador app" command="/Users/henriquepaixao/Foodbot/foodbot-ops/bin/agent" start_suspended=true {
+                args "forseti"
             }
-            pane name="🔧 Heimerdinger · executor app" command="/Users/henriquepaixao/Foodbot/foodbot-ops/bin/agent" start_suspended=true {
-                args "heimerdinger"
+            pane name="􀀄 Völundr · executor app" command="/Users/henriquepaixao/Foodbot/foodbot-ops/bin/agent" start_suspended=true {
+                args "volundr"
             }
         }
     }
 
-    tab name="🐦‍⬛⏳ SWAIN" {
-        pane split_direction="vertical" {
-            pane name="🐦‍⬛ Swain · orquestrador" command="/Users/henriquepaixao/Foodbot/foodbot-ops/bin/agent" start_suspended=true {
-                args "swain"
+    tab name="􀀉􀀊􀀋􀀌 ESPECIALISTAS" {
+        pane split_direction="horizontal" {
+            pane split_direction="vertical" {
+                pane name="􀀉 Mímir · IA full-stack" command="/Users/henriquepaixao/Foodbot/foodbot-ops/bin/agent" start_suspended=true {
+                args "mimir"
             }
-            pane name="⏳ Zilean · IA full-stack" command="/Users/henriquepaixao/Foodbot/foodbot-ops/bin/agent" start_suspended=true {
-                args "zilean"
+                pane name="􀀊 Bifröst · integrações" command="/Users/henriquepaixao/Foodbot/foodbot-ops/bin/agent" start_suspended=true {
+                args "bifrost"
+            }
+            }
+            pane split_direction="vertical" {
+                pane name="􀀋 Bragi · texto, design, PDFs" command="/Users/henriquepaixao/Foodbot/foodbot-ops/bin/agent" start_suspended=true {
+                args "bragi"
+            }
+                pane name="􀀌 Níðhöggr · código morto e refatoração" command="/Users/henriquepaixao/Foodbot/foodbot-ops/bin/agent" start_suspended=true {
+                args "nidhoggr"
+            }
             }
         }
     }
 
-    tab name="EXTRA" {
-        pane name="⛓️ Thresh · 🎩 Lupin · 🪝 Pyke — sob demanda: runechest agent <nome>"
+    // TRIPULAÇÃO: the menu of all agents (Enter starts one, Ctrl-R resumes one) and the crew page with the real mood.
+    tab name="TRIPULAÇÃO" {
+        pane split_direction="vertical" {
+            pane name="menu" command="bash" size="60%" borderless=true {
+                args "/Users/henriquepaixao/Github/RuneChest/scripts/runechest-agents.sh"
+            }
+            pane name="humor (ENTER abre a página)" command="bash" size="40%" start_suspended=true {
+                args "/Users/henriquepaixao/Github/RuneChest/scripts/runechest-crew.sh"
+            }
+        }
     }
 
-    tab name="AGENTES" {
-        pane command="bash" borderless=true {
-            args "/Users/henriquepaixao/Github/RuneChest/scripts/runechest-agents.sh"
+    // AMBIENTE: the local backend and app (one environment = both). At most 2 environments on the Mac, for all
+    // sessions together (/Foodbot/CLAUDE.md §5). Suspended: ENTER starts each one; Ctrl-C stops it.
+    tab name="AMBIENTE" {
+        pane split_direction="vertical" {
+            pane name="backend · ./gradlew dev (8080)" command="./gradlew" cwd="/Users/henriquepaixao/Foodbot/foodbot-service" start_suspended=true {
+                args "dev"
+            }
+            pane name="app · scripts/dev.sh (5400)" command="./scripts/dev.sh" cwd="/Users/henriquepaixao/Foodbot/foodbot-app" start_suspended=true
         }
     }
 }

@@ -80,10 +80,10 @@ Every agent takes a Norse name by layer: gods lead and specialise, dwarf smiths 
 mechanical work and eat the dead code. Each one has a **bind-rune** (the rune of the first letter + the rune of the
 role, cut Mad Max style, in the neon of its layer) and an **avatar** (a Norse object or creature, made with
 [open-bot-avatar](https://github.com/DominikScholz/open-bot-avatar), MIT). The full story of each name is in
-[docs/nomes-nordicos.md](docs/nomes-nordicos.md). The FoodBot sessions switch to these names at the start of 2.9.0;
-the last column is the name they use until then.
+[docs/nomes-nordicos.md](docs/nomes-nordicos.md). The FoodBot sessions use these names from 2.9.0; the last
+column is the Runeterra name of 2.9.0 planning, kept for the history.
 
-| Rune | Avatar | Agent | Role | Model | Session | Until 2.9.0 |
+| Rune | Avatar | Agent | Role | Model | Session | Was |
 |:---:|:---:|---|---|---|---|---|
 | <img src="assets/runes/odin-neon.svg" width="44" alt="rune of Odin"> | <img src="assets/avatars/still/odin.svg" width="56" alt="Odin avatar"> | **Odin** | Orchestrator: plans the version, writes the tickets, decides with you, runs the release. Never edits code | Opus | fixed | Swain |
 | <img src="assets/runes/heimdall-neon.svg" width="44" alt="rune of Heimdall"> | <img src="assets/avatars/still/heimdall.svg" width="56" alt="Heimdall avatar"> | **Heimdall** | Backend integrator: reviews and merges service PRs, owns the migration queue | Opus | fixed | Galio |
@@ -116,17 +116,21 @@ verification) → **Regressivo** (Grisnir, Gnjóstr) → release, with your OK.
 
 ## Tabs
 
-The agent tabs keep the current names until the 2.9.0 switch; then they show the runes and the Norse names.
+One tab per layer (user decision 18/11). The tab names carry the bind-runes of the agents in them.
 
 | Key | Tab | What is in it |
 |---|---|---|
 | Option+1 | NVIM | Neovim (70 %) and the GUIA (30 %) |
-| Option+2 | PAINEL | Left: agents and diary. Right: machine, PRs, tokens |
-| Option+3 | 🗿⚙️ BACKEND | Galio and Viktor |
-| Option+4 | 💎🔧 APP | Taric and Heimerdinger |
-| Option+5 | 🐦‍⬛⏳ SWAIN | Swain and Zilean |
-| Option+6 | EXTRA | Thresh, Lupin, Pyke on demand |
-| Option+7 | AGENTES | fzf menu: Enter starts a session, Ctrl-R resumes one |
+| Option+2 | PAINEL | Huginn and Muninn. Left: the crew and the diary. Right: machine, PRs, tokens |
+| Option+3 | ᚨ ODIN | Odin, the orchestrator. **The only agent that starts with the layout** |
+| Option+4 | ᛉᚲ BACKEND | Heimdall │ Eitri (Brokkr and Grisnir are Eitri's subagents) |
+| Option+5 | ᛏᚷ APP | Forseti │ Völundr (Egill and Gnjóstr are Völundr's subagents) |
+| Option+6 | ᛚᚱᚹᚺ ESPECIALISTAS | Mímir │ Bifröst on top, Bragi │ Níðhöggr below |
+| Option+7 | TRIPULAÇÃO | fzf menu of the whole crew (Enter starts a session, Ctrl-R resumes one) and the crew page with the real mood |
+| Option+8 | AMBIENTE | The local backend (`./gradlew dev`, 8080) and app (`scripts/dev.sh`, 5400). At most 2 environments on the Mac |
+
+The agent panes and the AMBIENTE panes start suspended: they show the command, and ENTER starts it. When a session
+ends, ENTER starts a new one (one session per ticket).
 
 Other keys, in every Zellij mode (also inside Neovim): **Option+arrows** go to the next pane, **Option+g** shows
 the focused pane on the full screen (it hides the guide) and back. The key bar at the bottom shows the rest.

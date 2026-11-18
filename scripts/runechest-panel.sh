@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # runechest-panel — the PAINEL tab, in two columns (user decision 17/11):
-#   left:  AGENTES (vault 11-Agentes, emoji and colour from Identidade.md) and DIÁRIO (13-Diario of today)
+#   left:  TRIPULAÇÃO (vault 11-Agentes, rune, name and colour from Identidade.md) and DIÁRIO (13-Diario of today)
 #   right: MÁQUINA (heavy lanes), PRs ABERTOS (cache 2 min), TOKENS HOJE (ccusage)
 # Refreshes every RUNECHEST_PANEL_SECONDS (default 20). Read only. `--once` draws one time (for tests).
 set -uo pipefail
@@ -33,13 +33,15 @@ agents() { # width
         task=$(awk '/^---$/{n++; next} n==1 && /^tarefa:/{sub(/^tarefa: */,""); gsub(/"/,""); print; exit}' "$f")
         upd=$(awk -F': *' '/^---$/{n++; next} n==1 && $1=="atualizado"{gsub(/"/,"",$2); print $2; exit}' "$f")
         dd_who "$name"
+        [ "$DD_EMOJI" = "·" ] && continue   # only the crew of Identidade.md (not the notes of older versions)
         case $st in
             *bloq*|*block*) col=$Y ;;
             *andamento*|*working*|*ativo*|*revis*) col=$G ;;
             *) col=$C ;;
         esac
         [ "$upd" = "$today" ] || { col=$D; DD_COLOR=$D; }
-        printf '%s %s%s%-12s%s %s%-12s%s %s\n' "$DD_EMOJI" "$DD_COLOR" "$B" "$(cutn "$name" 12)" "$R" \
+        printf '%s %s%s%s%s%s%s %s%-12s%s %s\n' "$DD_EMOJI" "$DD_COLOR" "$B" "$DD_I" "$(cutn "$DD_NAME" 12)" \
+            "$(printf '%*s' $(( 12 - ${#DD_NAME} > 0 ? 12 - ${#DD_NAME} : 0 )) '')" "$R" \
             "$col" "$(cutn "${st:-—}" 12)" "$R" "$(cutn "$task" $(( w - 30 )))"
     done
 }
