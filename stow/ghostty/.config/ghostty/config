@@ -7,6 +7,10 @@ font-family = "JetBrainsMono Nerd Font"
 font-size = 16
 font-thicken = true
 adjust-cell-height = 10%
+# Italic is a second typeface: Monaspace Radon (hand-written look). The agent names in the tabs, the panel and the
+# agent menu are printed in italic, so they stand out from the code. Code comments in italic use it too.
+font-family-italic = "Monaspace Radon"
+font-family-bold-italic = "Monaspace Radon"
 
 # Colours: near black, soft contrast
 background = #0e0e14
