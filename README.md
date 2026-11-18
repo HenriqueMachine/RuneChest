@@ -102,10 +102,13 @@ the last column is the name they use until then.
 The infrastructure has Norse names too: **Yggdrasil** is the vault (the tree that holds the worlds together),
 **Gleipnir** is the `agent-guard` hook (the thin chain that holds Fenrir), **Ratatoskr** carries the notifications
 (the squirrel that runs messages up and down the tree), and **Huginn and Muninn** are the PAINEL (Odin's ravens,
-thought and memory). See the crew alive: [the crew page](https://henriquemachine.github.io/RuneChest/). Each agent has a personality
-(a base mood, a way to look, moods it drifts into); hover an agent and it looks at you. On your own machine,
-`runechest tripulacao` shows the **real** mood of each agent, read from the `status` of its vault note (working =
-thinking, merged = happy, waiting = idle). That file stays local and is never published.
+thought and memory). See the crew alive: [the crew page](https://henriquemachine.github.io/RuneChest/). The agents have five emotions,
+each with its own eyes, motion, symbol and glow: **idle** (calm), **focused** (lids slanting in, slow breathing, "…"),
+**reviewing** (one eye squinted, head tilted, "?"), **blocked** (sad lids, a sweat drop, a short tremble, the neon
+turns red, "!") and **celebrating** (a hop, sparkles, bright glow, for 2 minutes after a PR merge). On the public page
+each agent has a personality and drifts between them. On your own machine, `runechest tripulacao` shows the **real**
+emotion, every 30 s: the vault (`status`, `bloqueio`), GitHub (the PRs of the agent's note: merged, or a change
+requested) and the heavy queue (a check running on the agent's PR branch). That file stays local and is never published.
 
 A ticket passes six gates, and a failure goes back one gate: **Ready** (Odin) → **Build**, tests first
 (executor) → **Candidate** → **Review** (Heimdall or Forseti; Bragi for text) → **Train** (merge in batches, one
