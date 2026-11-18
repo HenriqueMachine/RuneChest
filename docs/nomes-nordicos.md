@@ -7,9 +7,12 @@ Runeterra names (Swain, Galio, …). Nothing changes in the middle of 2.8.0.
 
 1. **Names by layer.** Gods lead and specialise; dwarf smiths execute and help; beasts do the mechanical work and eat
    the dead code; objects and creatures name the infrastructure.
-2. **Runes: Unicode now, SVG later.** The tabs, the panel and the agent menu use the real Elder Futhark runes of
-   Unicode (U+16A0–16FF; macOS draws them with Apple Symbols). Later we draw our own SVG runes (one bind-rune per
-   agent), build the `Deepdeck Runes` font and map it in Ghostty with `font-codepoint-map`.
+2. **Runes: our own bind-runes (approved 17/11, draft 3).** One bind-rune per agent (the rune of the first letter +
+   the rune of the role), with Mad Max cuts (chamfered ends, V notches) and the neon of the layer. They live in
+   `assets/runes/`: `<name>.svg` (one colour, for the font), `<name>-neon.svg` (glow, for the README, the site and the
+   slides), `preview.html`, and the `Deepdeck Runes` font (U+100000 to U+10000C, mapped in Ghostty with
+   `font-codepoint-map`). `deepdeck runas` shows them. Build: `.venv/bin/python assets/runes/build.py --install`.
+   The Unicode Elder Futhark runes stay the fallback where the font is not installed (GitHub, Obsidian).
 3. **Typography in the terminal: Monaspace.** Ghostty draws italic with Monaspace Radon. The scripts print the agent
    names in italic, so a name looks different from the code around it.
 4. **Scope: everything, at the start of 2.9.0.** Deepdeck, `.claude/agents`, the skills, `bin/agent`, the hooks, the
@@ -54,4 +57,4 @@ scripts read it.
 3. Deepdeck: the `deepdeck` layout (tab names with the runes), `deepdeck-panel.sh` and `deepdeck-agents.sh` (italic
    names), the README crew table.
 4. GitHub signatures: `OK (ᛉ Heimdall)` replaces `OK (🗿 Galio)`.
-5. Later: the SVG runes, the `Deepdeck Runes` font, `font-codepoint-map` in Ghostty.
+5. Tabs and scripts: print the rune of `assets/runes/codepoints.tsv` before each agent name.

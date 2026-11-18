@@ -11,10 +11,14 @@ Outputs, in this folder:
   <name>.svg       one colour (currentColor), for the terminal font (the glyphs of Deepdeck Runes).
   <name>-neon.svg  the neon colour of the agent's layer with a glow, for the README, the site and the slides.
   preview.html     the comparison page.
-Run: python3 -I assets/runes/build.py
+  DeepdeckRunes.ttf  the terminal font: one glyph per agent from U+100000 (Plane 16 private use area, so no clash
+                   with the Nerd Font). Needs fontTools (`.venv/bin/pip install fonttools`).
+Run: .venv/bin/python assets/runes/build.py [--install]   (--install copies the font to ~/Library/Fonts)
 """
 import math
 import random
+import shutil
+import sys
 from html import escape
 from pathlib import Path
 
@@ -157,11 +161,58 @@ def svg(polys: list, title: str, neon: str | None = None) -> str:
     )
 
 
+FIRST_CODEPOINT = 0x100000
+EM = 1000
+
+
+def font_contour(poly):
+    """Grid (y down, 0..100) to font units (y up). The cell is square; the rune sits from -50 to 750."""
+    pts = [(round(x * 10), round((100 - y) * 10 - 150)) for x, y in poly]
+    area = sum(x1 * y2 - x2 * y1 for (x1, y1), (x2, y2) in zip(pts, pts[1:] + pts[:1]))
+    return pts if area < 0 else list(reversed(pts))   # TrueType outer contours go clockwise
+
+
+def build_font(glyphs: list) -> Path:
+    from fontTools.fontBuilder import FontBuilder
+    from fontTools.pens.ttGlyphPen import TTGlyphPen
+
+    order = [".notdef"] + [g for g, _, _ in glyphs]
+    fb = FontBuilder(EM, isTTF=True)
+    fb.setupGlyphOrder(order)
+    fb.setupCharacterMap({cp: g for g, cp, _ in glyphs})
+    outlines = {".notdef": TTGlyphPen(None).glyph()}
+    for g, _, polys in glyphs:
+        pen = TTGlyphPen(None)
+        for poly in polys:
+            pts = font_contour(poly)
+            pen.moveTo(pts[0])
+            for pt in pts[1:]:
+                pen.lineTo(pt)
+            pen.closePath()
+        outlines[g] = pen.glyph()
+    fb.setupGlyf(outlines)
+    for g in outlines.values():
+        if g.numberOfContours > 0:
+            g.flags[0] |= 0x40   # OVERLAP_SIMPLE: the strokes overlap, draw them as one shape
+    fb.setupHorizontalMetrics({g: (EM, 0) for g in order})
+    fb.setupHorizontalHeader(ascent=800, descent=-200)
+    fb.setupNameTable({"familyName": "Deepdeck Runes", "styleName": "Regular",
+                       "uniqueFontIdentifier": "Deepdeck Runes Regular 1.0", "fullName": "Deepdeck Runes",
+                       "psName": "DeepdeckRunes-Regular", "version": "Version 1.0"})
+    fb.setupOS2(sTypoAscender=800, sTypoDescender=-200, usWinAscent=800, usWinDescent=200,
+                fsType=0, achVendID="DPDK")
+    fb.setupPost(isFixedPitch=1)
+    out = HERE / "DeepdeckRunes.ttf"
+    fb.save(str(out))
+    return out
+
+
 def main() -> None:
-    cards = []
-    for name, initial, role_rune, role, today, layer, neon in CREW:
+    cards, glyphs = [], []
+    for i, (name, initial, role_rune, role, today, layer, neon) in enumerate(CREW):
         title = f"{name}: {RUNES[initial][0]} + {RUNES[role_rune][0]}"
         polys = polygons(strokes_of(initial, role_rune), name)
+        glyphs.append((slug(name), FIRST_CODEPOINT + i, polys))
         mono, glow = svg(polys, title), svg(polys, title, neon)
         (HERE / f"{slug(name)}.svg").write_text(mono, encoding="utf-8")
         (HERE / f"{slug(name)}-neon.svg").write_text(glow, encoding="utf-8")
@@ -180,6 +231,19 @@ def main() -> None:
         )
     (HERE / "preview.html").write_text(PAGE.replace("{{CARDS}}", "\n".join(cards)), encoding="utf-8")
     print(f"{len(CREW)} runes (mono + neon) -> {HERE}")
+    table = "\n".join(f"{n}\tU+{FIRST_CODEPOINT + i:06X}\t{c}\t{r}\t{t}"
+                      for i, (n, _a, _b, r, t, _l, c) in enumerate(CREW))
+    (HERE / "codepoints.tsv").write_text("agent\tcodepoint\tneon\trole\ttoday\n" + table + "\n", encoding="utf-8")
+    try:
+        font = build_font(glyphs)
+    except ImportError:
+        print("fontTools is missing: .venv/bin/pip install fonttools (the SVGs are done)")
+        return
+    print(f"font -> {font}")
+    if "--install" in sys.argv:
+        dest = Path.home() / "Library" / "Fonts" / font.name
+        shutil.copyfile(font, dest)
+        print(f"installed -> {dest}")
 
 
 PAGE = """<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">

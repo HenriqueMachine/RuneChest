@@ -1,0 +1,14 @@
+agent	codepoint	neon	role	today
+Odin	U+100000	#f9f002	Orquestrador	Swain
+Heimdall	U+100001	#05d9e8	Integrador do backend	Galio
+Forseti	U+100002	#ff2a6d	Integrador do app	Taric
+Eitri	U+100003	#3d9bff	Executor do backend	Viktor
+Völundr	U+100004	#ff4fd8	Executor do app	Heimerdinger
+Brokkr	U+100005	#8cc2ff	Ajudante de Eitri	Xayah
+Egill	U+100006	#ff9ce9	Ajudante de Völundr	Rakan
+Grisnir	U+100007	#c4e0ff	Mecânico de Eitri	Ziggs
+Gnjóstr	U+100008	#ffc9f3	Mecânico de Völundr	Rumble
+Mímir	U+100009	#ffb000	IA full-stack	Zilean
+Bifröst	U+10000A	#00ff9f	Integrações	Thresh
+Bragi	U+10000B	#c77dff	Texto, design, PDFs	Lupin
+Níðhöggr	U+10000C	#ff7a3d	Código morto e refatoração	Pyke

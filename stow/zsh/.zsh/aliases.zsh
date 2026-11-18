@@ -84,6 +84,7 @@ deepdeck() {
     agent|a)      [[ -n "$2" ]] || { print "uso: deepdeck agent <nome>"; return 1; }
                   "$HOME/Foodbot/foodbot-ops/bin/agent" "${@:2}" ;;
     panel|painel) bash "$DEEPDECK_DIR/scripts/deepdeck-panel.sh" ;;
+    runas|runes)  bash "$DEEPDECK_DIR/scripts/deepdeck-runes.sh" ;;
     reset)        zellij kill-session deepdeck 2>/dev/null; zellij delete-session deepdeck 2>/dev/null
                   print "sessão deepdeck removida — 'deepdeck open' cria de novo" ;;
     dev)          dev ;;
@@ -105,6 +106,7 @@ deepdeck() {
       print "  agents    menu dos agentes (Enter: nova sessão · Ctrl-R: retomar)"
       print "  agent N   abre o agente N aqui (ex.: deepdeck agent thresh)"
       print "  panel     o painel de métricas neste painel"
+      print "  runas     a tripulação nórdica: runas, nomes e cores (2.9.0)"
       print "  reset     apaga a sessão deepdeck (o layout novo vale na próxima)"
       print "  dev       o layout antigo (editor + terminais + lib)"
       print "  work      Foodbot + CourtHub em paralelo (5 tabs)"

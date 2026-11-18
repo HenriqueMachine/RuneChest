@@ -11,6 +11,8 @@ adjust-cell-height = 10%
 # agent menu are printed in italic, so they stand out from the code. Code comments in italic use it too.
 font-family-italic = "Monaspace Radon"
 font-family-bold-italic = "Monaspace Radon"
+# The Deepdeck runes (assets/runes, one glyph per agent from U+100000) come from our own font.
+font-codepoint-map = U+100000-U+1000FF=Deepdeck Runes
 
 # Colours: near black, soft contrast
 background = #0e0e14
